@@ -1,289 +1,1957 @@
-<head>
-  <title>Free Keyword Research Tool | EZToolsKit</title>
-  <meta name="description" content="Discover trending keyword ideas from Google, YouTube, Bing, and Amazon. Free keyword research tool for SEO and bloggers.">
-  <meta name="keywords" content="keyword research, SEO tools, keyword generator, Google keyword ideas, YouTube SEO">
-  <meta name="robots" content="index, follow">
-  <meta property="og:title" content="Free Keyword Research Tool | EZToolsKit">
-  <meta property="og:description" content="Generate SEO keyword suggestions instantly from top platforms.">
-  <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
-  <meta property="og:url" content="https://yourdomain.com/keyword-research-tool.html">
-  <meta name="twitter:card" content="summary_large_image">
-  <link rel="icon" href="/favicon.ico">
-</head>
-
-<section id="keyword-tool" class="tool-wrapper">
-  <div class="header">
-    <h1>Keyword Research Tool</h1>
-    <p class="sub">Discover trending keyword suggestions from <strong>Google, YouTube, Bing,</strong> and <strong>Amazon</strong> — free and fast.</p>
-  </div>
-
-  <!-- 🔹 Ad Slot: Top Banner -->
-  <div class="ad-slot">
-   <script type="text/javascript">
-	atOptions = {
-		'key' : '36499e43b7e4f05e5e4ea13d0cdc485b',
-		'format' : 'iframe',
-		'height' : 90,
-		'width' : 728,
-		'params' : {}
-	};
-</script>
-<script type="text/javascript" src="//www.highperformanceformat.com/36499e43b7e4f05e5e4ea13d0cdc485b/invoke.js"></script>
-  </div>
-
-  <section class="trending">
-  <h3>🔥 Trending Keywords</h3>
-  <div class="trend-list" id="trendList">
-    <span>#AI Tools</span>
-    <span>#Tech News</span>
-    <span>#Blog SEO</span>
-    <span>#YouTube Growth</span>
-    <span>#Affiliate Marketing</span>
-  </div>
-</section>
-
-  <div class="tool-container">
-    <div class="input-box">
-      <select id="platform">
-        <option value="google">Google</option>
-        <option value="youtube">YouTube</option>
-        <option value="bing">Bing</option>
-        <option value="amazon">Amazon</option>
-      </select>
-      <input id="keyword" type="text" placeholder="Enter your keyword... e.g. best camera for vlogging" />
-      <button id="searchBtn"><i class="fa fa-search"></i> Search</button>
-    </div>
-
-    <div id="loading" class="loading" style="display:none;">🔍 Fetching keyword ideas...</div>
-
-    <div class="results-header" id="resultsHeader" style="display:none;">
-      <h2>Keyword Suggestions</h2>
-      <div class="actions">
-        <button id="copyBtn">📋 Copy All</button>
-        <button id="exportBtn">⬇️ Export CSV</button>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      Free Keyword Research Tool | EZToolsKit - Google, YouTube, Bing & Amazon
+    </title>
+    <meta
+      name="description"
+      content="Free Keyword Research Tool for SEO. Get trending keyword suggestions from Google, YouTube, Bing, and Amazon. Supports 50+ languages, dark mode, and CSV/JSON export."
+    />
+    <meta
+      name="keywords"
+      content="keyword research tool, free keyword generator, SEO keywords, YouTube keywords, Google keywords, Bing keywords, Amazon keywords, keyword suggestions"
+    />
+    <meta name="author" content="EZToolsKit" />
+    <meta
+      name="robots"
+      content="index, follow, max-snippet:-1, max-image-preview:large, max-video-preview:-1"
+    />
+    <meta
+      property="og:title"
+      content="Free Keyword Research Tool | EZToolsKit"
+    />
+    <meta
+      property="og:description"
+      content="Discover trending keyword suggestions from Google, YouTube, Bing, and Amazon — free and fast."
+    />
+    <meta property="og:type" content="website" />
+    <meta
+      property="og:url"
+      content="https://eztoolskit.blogspot.com/2025/10/keyword-research-tool.html"
+    />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta
+      name="twitter:title"
+      content="Free Keyword Research Tool | EZToolsKit"
+    />
+    <meta
+      name="twitter:description"
+      content="Get trending keyword suggestions from Google, YouTube, Bing, and Amazon"
+    />
+    <link
+      rel="canonical"
+      href="https://eztoolskit.blogspot.com/2025/10/keyword-research-tool.html"
+    />
+    <link rel="icon" href="/favicon.ico" />
+    <style>
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f9f9f9;
+        --text-primary: #222222;
+        --text-secondary: #444444;
+        --border-color: #cccccc;
+        --accent-primary: #0072ff;
+        --accent-secondary: #00c6ff;
+        --hover-bg: #eef6ff;
+      }
+      body.dark-mode {
+        --bg-primary: #1a1a1a;
+        --bg-secondary: #2d2d2d;
+        --text-primary: #e0e0e0;
+        --text-secondary: #b0b0b0;
+        --border-color: #444444;
+        --hover-bg: #1e3a5f;
+      }
+      * {
+        transition: background-color 0.3s ease, color 0.3s ease;
+      }
+      body {
+        background-color: var(--bg-primary);
+        color: var(--text-primary);
+        font-family: "Poppins", -apple-system, BlinkMacSystemFont, "Segoe UI",
+          sans-serif;
+        margin: 0;
+        padding: 0;
+      }
+      .tool-wrapper {
+        max-width: 900px;
+        margin: 20px auto;
+        padding: 20px;
+      }
+      .settings-bar {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 12px 20px;
+        background: var(--bg-secondary);
+        border-radius: 8px;
+        margin-bottom: 20px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .settings-left,
+      .settings-right {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+      .theme-btn {
+        background: var(--accent-primary);
+        color: white;
+        border: none;
+        padding: 8px 12px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-size: 1.2rem;
+      }
+      .theme-btn:hover {
+        opacity: 0.85;
+      }
+      .settings-select {
+        padding: 8px 12px;
+        border-radius: 6px;
+        border: 1px solid var(--border-color);
+        background: var(--bg-primary);
+        color: var(--text-primary);
+        font-size: 0.95rem;
+        cursor: pointer;
+      }
+      .header {
+        text-align: center;
+        margin-bottom: 20px;
+      }
+      .header h1 {
+        font-size: 2rem;
+        font-weight: 700;
+        background: linear-gradient(
+          90deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        margin: 0;
+      }
+      .sub {
+        font-size: 1rem;
+        color: var(--text-secondary);
+        margin: 10px 0 0 0;
+      }
+      .tool-container {
+        background: var(--bg-primary);
+        border-radius: 14px;
+        box-shadow: 0 3px 12px rgba(0, 0, 0, 0.08);
+        padding: 24px;
+        border: 1px solid var(--border-color);
+      }
+      .trending {
+        margin-top: 40px;
+        text-align: center;
+      }
+      .trend-controls {
+        display: flex;
+        justify-content: center;
+        gap: 10px;
+        margin: 10px 0;
+        align-items: center;
+      }
+      .refresh-btn {
+        background: var(--accent-primary);
+        color: white;
+        border: none;
+        padding: 8px 14px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+      }
+      .refresh-btn:hover {
+        opacity: 0.85;
+      }
+      .trend-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+        margin-top: 10px;
+      }
+      .trend-list span {
+        background: var(--hover-bg);
+        border-radius: 20px;
+        padding: 8px 14px;
+        cursor: pointer;
+        font-size: 0.95rem;
+        color: var(--accent-primary);
+        font-weight: 500;
+        border: 1px solid #e1e7ff;
+      }
+      .trend-list span:hover {
+        background: var(--accent-primary);
+        color: white;
+      }
+      .input-box {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .input-box select,
+      .input-box input {
+        flex: 1;
+        min-width: 160px;
+        padding: 12px;
+        border-radius: 8px;
+        border: 1px solid var(--border-color);
+        font-size: 1rem;
+        background: var(--bg-primary);
+        color: var(--text-primary);
+      }
+      .input-box button {
+        background: linear-gradient(
+          90deg,
+          var(--accent-primary),
+          var(--accent-secondary)
+        );
+        color: white;
+        border: none;
+        padding: 12px 22px;
+        border-radius: 8px;
+        cursor: pointer;
+        font-weight: 600;
+      }
+      .input-box button:hover {
+        opacity: 0.85;
+      }
+      .loading {
+        text-align: center;
+        margin: 20px 0;
+        font-weight: 600;
+        color: var(--accent-primary);
+      }
+      .results-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin: 20px 0 10px;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+      .results-header h2 {
+        font-size: 1.2rem;
+        font-weight: 600;
+        margin: 0;
+      }
+      .actions button {
+        background: var(--bg-secondary);
+        border: 1px solid var(--border-color);
+        padding: 8px 14px;
+        margin-left: 6px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        color: var(--text-primary);
+      }
+      .actions button:hover {
+        background: var(--accent-primary);
+        color: white;
+      }
+      .results-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 10px;
+      }
+      .result-item {
+        background: #f8faff;
+        border: 1px solid #e1e7ff;
+        padding: 12px;
+        border-radius: 10px;
+        cursor: pointer;
+      }
+      .result-item:hover {
+        background: var(--hover-bg);
+        transform: translateY(-2px);
+      }
+      .ad-slot {
+        border: 1px solid var(--border-color);
+        text-align: center;
+        padding: 8px;
+        margin: 16px 0;
+        border-radius: 6px;
+        background: var(--bg-secondary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        overflow: hidden;
+        min-height: 70px;
+      }
+      /* AD SLOT 1 - Banner 728x90 */
+      .ad-slot:nth-of-type(1) {
+        min-height: 100px;
+      }
+      /* AD SLOT 2 - Native Banner */
+      .ad-slot:nth-of-type(2) {
+        min-height: 120px;
+      }
+      /* AD SLOT 3 - Banner 320x50 */
+      .ad-slot:nth-of-type(3) {
+        min-height: 70px;
+      }
+      .ad-slot iframe {
+        max-width: 100% !important;
+        width: 100% !important;
+        height: auto !important;
+        display: block !important;
+        border: none !important;
+      }
+      .ad-slot script {
+        display: none;
+      }
+      .ad-slot div {
+        width: 100%;
+        height: auto;
+      }
+      @media (max-width: 700px) {
+        .input-box {
+          flex-direction: column;
+        }
+        .settings-bar {
+          flex-direction: column;
+        }
+        .header h1 {
+          font-size: 1.5rem;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <section class="tool-wrapper">
+      <div class="settings-bar">
+        <div class="settings-left">
+          <button
+            id="themeToggle"
+            class="theme-btn"
+            title="Toggle Dark/Light Mode"
+          >
+            🌙
+          </button>
+          <select id="language" class="settings-select" title="Select Language">
+            <option value="en">English</option>
+            <option value="es">Español</option>
+            <option value="fr">Français</option>
+            <option value="de">Deutsch</option>
+            <option value="it">Italiano</option>
+            <option value="pt">Português</option>
+            <option value="ru">Русский</option>
+            <option value="ja">日本語</option>
+            <option value="zh">中文</option>
+            <option value="hi">हिन्दी</option>
+            <option value="ar">العربية</option>
+            <option value="ko">한국어</option>
+            <option value="tr">Türkçe</option>
+            <option value="pl">Polski</option>
+            <option value="nl">Nederlands</option>
+            <option value="sv">Svenska</option>
+            <option value="no">Norsk</option>
+            <option value="da">Dansk</option>
+            <option value="fi">Suomi</option>
+            <option value="cs">Čeština</option>
+            <option value="sk">Slovenčina</option>
+            <option value="hu">Magyar</option>
+            <option value="ro">Română</option>
+            <option value="bg">Български</option>
+            <option value="hr">Hrvatski</option>
+            <option value="sr">Српски</option>
+            <option value="uk">Українська</option>
+            <option value="el">Ελληνικά</option>
+            <option value="vi">Tiếng Việt</option>
+            <option value="th">ไทย</option>
+            <option value="id">Bahasa Indonesia</option>
+            <option value="ms">Bahasa Melayu</option>
+            <option value="tl">Tagalog</option>
+            <option value="bn">বাংলা</option>
+            <option value="pa">ਪੰਜਾਬੀ</option>
+            <option value="ta">தமிழ்</option>
+            <option value="te">తెలుగు</option>
+            <option value="kn">ಕನ್ನಡ</option>
+            <option value="ml">മലയാളം</option>
+            <option value="ur">اردو</option>
+            <option value="he">עברית</option>
+            <option value="fa">فارسی</option>
+            <option value="sw">Kiswahili</option>
+            <option value="am">አማርኛ</option>
+            <option value="yo">Yorùbá</option>
+            <option value="ig">Igbo</option>
+            <option value="zu">isiZulu</option>
+            <option value="af">Afrikaans</option>
+            <option value="ca">Català</option>
+            <option value="eu">Euskera</option>
+            <option value="gl">Galego</option>
+          </select>
+        </div>
+        <div class="settings-right">
+          <span
+            id="userLocation"
+            style="font-size: 0.9rem; color: var(--text-secondary)"
+          ></span>
+        </div>
       </div>
-    </div>
 
-    <div id="results" class="results-grid"></div>
+      <div class="header">
+        <h1 id="pageTitle">Keyword Research Tool</h1>
+        <p class="sub" id="pageSubtitle">
+          Discover trending keyword suggestions from Google, YouTube, Bing, and
+          Amazon — free and fast.
+        </p>
+      </div>
 
-    <!-- 🔹 Ad Slot: Middle -->
-    <div class="ad-slot">
-     <script async="async" data-cfasync="false" src="//pl27890421.effectivegatecpm.com/ff701f4460ea5066c48f5a868682d852/invoke.js"></script>
-<div id="container-ff701f4460ea5066c48f5a868682d852"></div>
-    </div>
+      <!-- AD SLOT 1 - TOP -->
+      <div class="ad-slot">
+        <script type="text/javascript">
+          atOptions = {
+            key: "36499e43b7e4f05e5e4ea13d0cdc485b",
+            format: "iframe",
+            height: 90,
+            width: 728,
+            params: {},
+          };
+        </script>
+        <script
+          type="text/javascript"
+          src="//www.highperformanceformat.com/36499e43b7e4f05e5e4ea13d0cdc485b/invoke.js"
+        ></script>
+      </div>
 
-    <div id="noResults" style="display:none;">❌ No suggestions found. Try another keyword.</div>
-  </div>
+      <section class="trending">
+        <h3>🔥 Trending Keywords</h3>
+        <div class="trend-controls">
+          <button id="refreshTrends" class="refresh-btn">🔄 Refresh</button>
+        </div>
+        <div class="trend-list" id="trendList">
+          <span>Loading...</span>
+        </div>
+      </section>
 
-  <!-- 🔹 Ad Slot: Bottom Banner -->
-  <div class="ad-slot">
-<script async="async" data-cfasync="false" src="//pl27890421.effectivegatecpm.com/ff701f4460ea5066c48f5a868682d852/invoke.js"></script>
-<div id="container-ff701f4460ea5066c48f5a868682d852"></div>
-  </div>
-</section>
+      <div class="tool-container">
+        <div class="input-box">
+          <select id="platform" class="settings-select">
+            <option value="google">🔍 Google</option>
+            <option value="youtube">▶️ YouTube</option>
+            <option value="bing">🔵 Bing</option>
+            <option value="amazon">🛒 Amazon</option>
+            <option value="all">🌐 All Engines</option>
+          </select>
+          <input id="keyword" type="text" placeholder="Enter your keyword..." />
+          <button id="searchBtn" data-i18n="search_btn">🔍 Search</button>
+        </div>
 
-<!-- 💅 Modern CSS Styling -->
-<style>
-.tool-wrapper {
-  max-width: 900px;
-  margin: 40px auto;
-  padding: 20px;
-  font-family: "Poppins", sans-serif;
-  color: #222;
-}
-.header {text-align:center;margin-bottom:20px;}
-.header h1 {
-  font-size: 2rem;
-  font-weight: 700;
-  background: linear-gradient(90deg, #0072ff, #00c6ff);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-}
-.sub {font-size: 1rem;color: #444;}
-.ad-slot {
-  border: 1px dashed #ccc;
-  text-align: center;
-  padding: 12px;
-  margin: 16px 0;
-  border-radius: 8px;
-  background: #f9f9f9;
-}
-.tool-container {
-  background: #fff;
-  border-radius: 14px;
-  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
-  padding: 24px;
-}
-  .trending {margin-top:40px;text-align:center;}
-.trend-list {display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:10px;}
-.trend-list span {
-  background:#eef6ff;
-  border-radius:20px;
-  padding:8px 14px;
-  cursor:pointer;
-  font-size:0.95rem;
-  color:#0072ff;
-  font-weight:500;
-}
-.trend-list span:hover {background:#0072ff;color:#fff;}
-.input-box {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-  justify-content: space-between;
-}
-.input-box select, .input-box input {
-  flex: 1;
-  min-width: 160px;
-  padding: 12px;
-  border-radius: 8px;
-  border: 1px solid #ccc;
-  font-size: 1rem;
-}
-.input-box button {
-  background: linear-gradient(90deg, #0072ff, #00c6ff);
-  color: #fff;
-  border: none;
-  padding: 12px 22px;
-  border-radius: 8px;
-  cursor: pointer;
-  transition: 0.3s;
-  font-weight: 600;
-}
-.input-box button:hover {
-  opacity: 0.85;
-  transform: translateY(-1px);
-}
-.loading {
-  text-align: center;
-  margin: 20px 0;
-  font-weight: 600;
-  color: #0072ff;
-}
-.results-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin: 20px 0 10px;
-}
-.results-header h2 {
-  font-size: 1.2rem;
-  font-weight: 600;
-}
-.actions button {
-  background: #f0f0f0;
-  border: none;
-  padding: 8px 14px;
-  margin-left: 6px;
-  border-radius: 6px;
-  cursor: pointer;
-  font-weight: 500;
-}
-.results-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
-  gap: 10px;
-}
-.result-item {
-  background: #f8faff;
-  border: 1px solid #e1e7ff;
-  padding: 12px;
-  border-radius: 10px;
-  transition: 0.2s;
-}
-.result-item:hover {
-  background: #eef6ff;
-}
-@media(max-width:700px) {
-  .input-box{flex-direction:column;}
-  .actions{flex-wrap:wrap;}
-}
-</style>
+        <div id="loading" class="loading" style="display: none">
+          🔍 Fetching keyword ideas...
+        </div>
 
-<!-- ⚙️ Functional JS -->
-<script>
-  
-  document.querySelectorAll('.trend-list span').forEach(btn=>{
-  btn.addEventListener('click', ()=>{
-    document.getElementById('keyword').value = btn.textContent.replace('#','');
-    document.getElementById('searchBtn').click();
-  });
-});
-async function getSuggestions(platform, query) {
-  try {
-    const url = `https://api.datamuse.com/words?ml=${encodeURIComponent(query)}&max=25`;
-    const res = await fetch(url);
-    const data = await res.json();
-    const suggestions = data.map(item => item.word);
-    return suggestions;
-  } catch (err) {
-    console.error("Error fetching:", err);
-    return [];
-  }
-}
+        <!-- AD SLOT 2 - MIDDLE (Native Banner) -->
+        <div class="ad-slot">
+          <script
+            async="async"
+            data-cfasync="false"
+            src="//pl27890421.effectivegatecpm.com/ff701f4460ea5066c48f5a868682d852/invoke.js"
+          ></script>
+          <div id="container-ff701f4460ea5066c48f5a868682d852"></div>
+        </div>
 
+        <div class="results-header" id="resultsHeader" style="display: none">
+          <h2>Keyword Suggestions</h2>
+          <div class="actions">
+            <button id="copyBtn">📋 Copy All</button>
+            <button id="exportBtn">⬇️ Export CSV</button>
+            <button id="exportJson">📄 Export JSON</button>
+          </div>
+        </div>
 
+        <div id="results" class="results-grid"></div>
+        <div id="noResults" style="display: none">
+          ❌ No suggestions found. Try another keyword.
+        </div>
+      </div>
 
-document.getElementById("searchBtn").addEventListener("click", async ()=>{
-  const platform = document.getElementById("platform").value;
-  const keyword = document.getElementById("keyword").value.trim();
-  const loading = document.getElementById("loading");
-  const resultsGrid = document.getElementById("results");
-  const header = document.getElementById("resultsHeader");
-  const noResults = document.getElementById("noResults");
+      <!-- AD SLOT 3 - BOTTOM (Banner 320x50) -->
+      <div class="ad-slot">
+        <script type="text/javascript">
+          atOptions = {
+            key: "205b14a0c2e63baa39d830075ee1ba9d",
+            format: "iframe",
+            height: 50,
+            width: 320,
+            params: {},
+          };
+        </script>
+        <script
+          type="text/javascript"
+          src="//www.highperformanceformat.com/205b14a0c2e63baa39d830075ee1ba9d/invoke.js"
+        ></script>
+      </div>
+    </section>
 
-  if (!keyword) return alert("Please enter a keyword");
+    <script>
+      // ============ TRANSLATIONS (50+ LANGUAGES) ============
+      const translations = {
+        en: {
+          title: "Keyword Research Tool",
+          subtitle:
+            "Discover trending keyword suggestions from Google, YouTube, Bing, and Amazon — free and fast.",
+          trending: "🔥 Trending Keywords",
+          search_btn: "🔍 Search",
+          loading: "🔍 Fetching keyword ideas...",
+          suggestions: "Keyword Suggestions",
+          copy_all: "📋 Copy All",
+          export_csv: "⬇️ Export CSV",
+          export_json: "📄 Export JSON",
+          no_results: "❌ No suggestions found. Try another keyword.",
+          copied: "✅ All keywords copied!",
+          refresh: "🔄 Refresh",
+          placeholder: "Enter your keyword...",
+        },
+        es: {
+          title: "Herramienta de Investigación de Palabras Clave",
+          subtitle:
+            "Descubre sugerencias de palabras clave tendencias de Google, YouTube, Bing y Amazon — gratis y rápido.",
+          trending: "🔥 Palabras Clave Tendencias",
+          search_btn: "🔍 Buscar",
+          loading: "🔍 Obteniendo ideas de palabras clave...",
+          suggestions: "Sugerencias de Palabras Clave",
+          copy_all: "📋 Copiar Todo",
+          export_csv: "⬇️ Exportar CSV",
+          export_json: "📄 Exportar JSON",
+          no_results:
+            "❌ No se encontraron sugerencias. Intenta otra palabra clave.",
+          copied: "✅ ¡Todas las palabras clave copiadas!",
+          refresh: "🔄 Actualizar",
+          placeholder: "Ingresa tu palabra clave...",
+        },
+        fr: {
+          title: "Outil de Recherche de Mots-clés",
+          subtitle:
+            "Découvrez des suggestions de mots-clés tendances de Google, YouTube, Bing et Amazon — gratuit et rapide.",
+          trending: "🔥 Mots-clés Tendances",
+          search_btn: "🔍 Rechercher",
+          loading: "🔍 Récupération des idées de mots-clés...",
+          suggestions: "Suggestions de Mots-clés",
+          copy_all: "📋 Copier Tout",
+          export_csv: "⬇️ Exporter CSV",
+          export_json: "📄 Exporter JSON",
+          no_results: "❌ Aucune suggestion trouvée. Essayez un autre mot-clé.",
+          copied: "✅ Tous les mots-clés copiés!",
+          refresh: "🔄 Actualiser",
+          placeholder: "Entrez votre mot-clé...",
+        },
+        de: {
+          title: "Keyword-Recherche-Tool",
+          subtitle:
+            "Entdecken Sie Trend-Keyword-Vorschläge von Google, YouTube, Bing und Amazon — kostenlos und schnell.",
+          trending: "🔥 Trend-Keywords",
+          search_btn: "🔍 Suchen",
+          loading: "🔍 Keyword-Ideen werden abgerufen...",
+          suggestions: "Keyword-Vorschläge",
+          copy_all: "📋 Alle Kopieren",
+          export_csv: "⬇️ CSV Exportieren",
+          export_json: "📄 JSON Exportieren",
+          no_results:
+            "❌ Keine Vorschläge gefunden. Versuchen Sie ein anderes Keyword.",
+          copied: "✅ Alle Keywords kopiert!",
+          refresh: "🔄 Aktualisieren",
+          placeholder: "Geben Sie Ihr Keyword ein...",
+        },
+        it: {
+          title: "Strumento di Ricerca Parole Chiave",
+          subtitle:
+            "Scopri suggerimenti di parole chiave di tendenza da Google, YouTube, Bing e Amazon — gratuito e veloce.",
+          trending: "🔥 Parole Chiave di Tendenza",
+          search_btn: "🔍 Cerca",
+          loading: "🔍 Recupero idee di parole chiave...",
+          suggestions: "Suggerimenti di Parole Chiave",
+          copy_all: "📋 Copia Tutto",
+          export_csv: "⬇️ Esporta CSV",
+          export_json: "📄 Esporta JSON",
+          no_results:
+            "❌ Nessun suggerimento trovato. Prova un'altra parola chiave.",
+          copied: "✅ Tutte le parole chiave copiate!",
+          refresh: "🔄 Aggiorna",
+          placeholder: "Inserisci la tua parola chiave...",
+        },
+        pt: {
+          title: "Ferramenta de Pesquisa de Palavras-chave",
+          subtitle:
+            "Descubra sugestões de palavras-chave em tendência do Google, YouTube, Bing e Amazon — gratuito e rápido.",
+          trending: "🔥 Palavras-chave em Tendência",
+          search_btn: "🔍 Pesquisar",
+          loading: "🔍 Buscando ideias de palavras-chave...",
+          suggestions: "Sugestões de Palavras-chave",
+          copy_all: "📋 Copiar Tudo",
+          export_csv: "⬇️ Exportar CSV",
+          export_json: "📄 Exportar JSON",
+          no_results:
+            "❌ Nenhuma sugestão encontrada. Tente outra palavra-chave.",
+          copied: "✅ Todas as palavras-chave copiadas!",
+          refresh: "🔄 Atualizar",
+          placeholder: "Digite sua palavra-chave...",
+        },
+        ru: {
+          title: "Инструмент исследования ключевых слов",
+          subtitle:
+            "Откройте для себя тренды ключевых слов от Google, YouTube, Bing и Amazon — бесплатно и быстро.",
+          trending: "🔥 Тренды ключевых слов",
+          search_btn: "🔍 Поиск",
+          loading: "🔍 Получение идей ключевых слов...",
+          suggestions: "Предложения ключевых слов",
+          copy_all: "📋 Копировать все",
+          export_csv: "⬇️ Экспорт CSV",
+          export_json: "📄 Экспорт JSON",
+          no_results:
+            "❌ Предложения не найдены. Попробуйте другое ключевое слово.",
+          copied: "✅ Все ключевые слова скопированы!",
+          refresh: "🔄 Обновить",
+          placeholder: "Введите ключевое слово...",
+        },
+        ja: {
+          title: "キーワード調査ツール",
+          subtitle:
+            "Google、YouTube、Bing、Amazonからのトレンドキーワード提案を発見 — 無料で高速。",
+          trending: "🔥 トレンドキーワード",
+          search_btn: "🔍 検索",
+          loading: "🔍 キーワードアイデアを取得中...",
+          suggestions: "キーワード提案",
+          copy_all: "📋 すべてコピー",
+          export_csv: "⬇️ CSVエクスポート",
+          export_json: "📄 JSONエクスポート",
+          no_results:
+            "❌ 提案が見つかりません。別のキーワードを試してください。",
+          copied: "✅ すべてのキーワードがコピーされました!",
+          refresh: "🔄 更新",
+          placeholder: "キーワードを入力...",
+        },
+        zh: {
+          title: "关键词研究工具",
+          subtitle:
+            "发现来自Google、YouTube、Bing和Amazon的趋势关键词建议 — 免费且快速。",
+          trending: "🔥 趋势关键词",
+          search_btn: "🔍 搜索",
+          loading: "🔍 正在获取关键词想法...",
+          suggestions: "关键词建议",
+          copy_all: "📋 复制全部",
+          export_csv: "⬇️ 导出CSV",
+          export_json: "📄 导出JSON",
+          no_results: "❌ 未找到建议。请尝试其他关键词。",
+          copied: "✅ 所有关键词已复制!",
+          refresh: "🔄 刷新",
+          placeholder: "输入您的关键词...",
+        },
+        hi: {
+          title: "कीवर्ड रिसर्च टूल",
+          subtitle:
+            "Google, YouTube, Bing और Amazon से ट्रेंडिंग कीवर्ड सुझाव खोजें — मुफ्त और तेज।",
+          trending: "🔥 ट्रेंडिंग कीवर्ड",
+          search_btn: "🔍 खोजें",
+          loading: "🔍 कीवर्ड विचार प्राप्त कर रहे हैं...",
+          suggestions: "कीवर्ड सुझाव",
+          copy_all: "📋 सभी कॉपी करें",
+          export_csv: "⬇️ CSV निर्यात करें",
+          export_json: "📄 JSON निर्यात करें",
+          no_results: "❌ कोई सुझाव नहीं मिला। दूसरा कीवर्ड आजमाएं।",
+          copied: "✅ सभी कीवर्ड कॉपी किए गए!",
+          refresh: "🔄 ताज़ा करें",
+          placeholder: "अपना कीवर्ड दर्ज करें...",
+        },
+        ar: {
+          title: "أداة البحث عن الكلمات الرئيسية",
+          subtitle:
+            "اكتشف اقتراحات الكلمات الرئيسية الشائعة من Google و YouTube و Bing و Amazon — مجاني وسريع.",
+          trending: "🔥 الكلمات الرئيسية الشائعة",
+          search_btn: "🔍 بحث",
+          loading: "🔍 جاري الحصول على أفكار الكلمات الرئيسية...",
+          suggestions: "اقتراحات الكلمات الرئيسية",
+          copy_all: "📋 نسخ الكل",
+          export_csv: "⬇️ تصدير CSV",
+          export_json: "📄 تصدير JSON",
+          no_results: "❌ لم يتم العثور على اقتراحات. جرب كلمة رئيسية أخرى.",
+          copied: "✅ تم نسخ جميع الكلمات الرئيسية!",
+          refresh: "🔄 تحديث",
+          placeholder: "أدخل كلمتك الرئيسية...",
+        },
+        ko: {
+          title: "키워드 조사 도구",
+          subtitle:
+            "Google, YouTube, Bing 및 Amazon의 트렌드 키워드 제안 발견 — 무료 및 빠름.",
+          trending: "🔥 트렌드 키워드",
+          search_btn: "🔍 검색",
+          loading: "🔍 키워드 아이디어를 가져오는 중...",
+          suggestions: "키워드 제안",
+          copy_all: "📋 모두 복사",
+          export_csv: "⬇️ CSV 내보내기",
+          export_json: "📄 JSON 내보내기",
+          no_results: "❌ 제안을 찾을 수 없습니다. 다른 키워드를 시도하세요.",
+          copied: "✅ 모든 키워드가 복사되었습니다!",
+          refresh: "🔄 새로고침",
+          placeholder: "키워드를 입력하세요...",
+        },
+        tr: {
+          title: "Anahtar Kelime Araştırma Aracı",
+          subtitle:
+            "Google, YouTube, Bing ve Amazon'dan trend anahtar kelime önerileri keşfedin — ücretsiz ve hızlı.",
+          trending: "🔥 Trend Anahtar Kelimeler",
+          search_btn: "🔍 Ara",
+          loading: "🔍 Anahtar kelime fikirleri alınıyor...",
+          suggestions: "Anahtar Kelime Önerileri",
+          copy_all: "📋 Tümünü Kopyala",
+          export_csv: "⬇️ CSV'ye Aktar",
+          export_json: "📄 JSON'a Aktar",
+          no_results: "❌ Öneri bulunamadı. Başka bir anahtar kelime deneyin.",
+          copied: "✅ Tüm anahtar kelimeler kopyalandı!",
+          refresh: "🔄 Yenile",
+          placeholder: "Anahtar kelimeni gir...",
+        },
+        pl: {
+          title: "Narzędzie do Badania Słów Kluczowych",
+          subtitle:
+            "Odkryj sugestie słów kluczowych z Google, YouTube, Bing i Amazon — bezpłatnie i szybko.",
+          trending: "🔥 Popularne Słowa Kluczowe",
+          search_btn: "🔍 Szukaj",
+          loading: "🔍 Pobieranie pomysłów słów kluczowych...",
+          suggestions: "Sugestie Słów Kluczowych",
+          copy_all: "📋 Kopiuj Wszystko",
+          export_csv: "⬇️ Eksportuj CSV",
+          export_json: "📄 Eksportuj JSON",
+          no_results:
+            "❌ Nie znaleziono sugestii. Spróbuj innego słowa kluczowego.",
+          copied: "✅ Wszystkie słowa kluczowe skopiowane!",
+          refresh: "🔄 Odśwież",
+          placeholder: "Wpisz swoje słowo kluczowe...",
+        },
+        nl: {
+          title: "Trefwoord Onderzoekstool",
+          subtitle:
+            "Ontdek trendende trefwoordsuggesties van Google, YouTube, Bing en Amazon — gratis en snel.",
+          trending: "🔥 Trendende Trefwoorden",
+          search_btn: "🔍 Zoeken",
+          loading: "🔍 Trefwoordideeën ophalen...",
+          suggestions: "Trefwoordsuggesties",
+          copy_all: "📋 Alles Kopiëren",
+          export_csv: "⬇️ Exporteer CSV",
+          export_json: "📄 Exporteer JSON",
+          no_results:
+            "❌ Geen suggesties gevonden. Probeer een ander trefwoord.",
+          copied: "✅ Alle trefwoorden gekopieerd!",
+          refresh: "🔄 Vernieuwen",
+          placeholder: "Voer uw trefwoord in...",
+        },
+      };
 
-  resultsGrid.innerHTML = "";
-  header.style.display = "none";
-  noResults.style.display = "none";
-  loading.style.display = "block";
+      // Add more languages (sv, no, da, fi, cs, sk, hu, ro, bg, hr, sr, uk, el, vi, th, id, ms, tl, bn, pa, ta, te, kn, ml, ur, he, fa, sw, am, yo, ig, zu, af, ca, eu, gl)
+      const moreTranslations = {
+        sv: {
+          title: "Nyckelordssökningsverktyg",
+          trending: "🔥 Trendande Nyckelord",
+          search_btn: "🔍 Sök",
+          suggestions: "Nyckelordförslag",
+          copy_all: "📋 Kopiera Alla",
+          export_csv: "⬇️ Exportera CSV",
+          export_json: "📄 Exportera JSON",
+          no_results: "❌ Inga förslag hittades.",
+          copied: "✅ Alla nyckelord kopierade!",
+          refresh: "🔄 Uppdatera",
+        },
+        no: {
+          title: "Nøkkelordssøkverktøy",
+          trending: "🔥 Trendende Nøkkelord",
+          search_btn: "🔍 Søk",
+          suggestions: "Nøkkelordforslag",
+          copy_all: "📋 Kopier Alt",
+          export_csv: "⬇️ Eksporter CSV",
+          export_json: "📄 Eksporter JSON",
+          no_results: "❌ Ingen forslag funnet.",
+          copied: "✅ Alle nøkkelord kopiert!",
+          refresh: "🔄 Oppdater",
+        },
+        da: {
+          title: "Nøgleordsundersøgelsesværktøj",
+          trending: "🔥 Trendende Nøgleord",
+          search_btn: "🔍 Søg",
+          suggestions: "Nøgleordforslag",
+          copy_all: "📋 Kopier Alt",
+          export_csv: "⬇️ Eksporter CSV",
+          export_json: "📄 Eksporter JSON",
+          no_results: "❌ Ingen forslag fundet.",
+          copied: "✅ Alle nøgleord kopieret!",
+          refresh: "🔄 Opdater",
+        },
+        fi: {
+          title: "Avainsanahahkutyökalu",
+          trending: "🔥 Trendit Avainsanat",
+          search_btn: "🔍 Hae",
+          suggestions: "Avainsanaehdotukset",
+          copy_all: "📋 Kopioi Kaikki",
+          export_csv: "⬇️ Vie CSV",
+          export_json: "📄 Vie JSON",
+          no_results: "❌ Ehdotuksia ei löytynyt.",
+          copied: "✅ Kaikki avainsanat kopioitu!",
+          refresh: "🔄 Päivitä",
+        },
+        cs: {
+          title: "Nástroj pro výzkum klíčových slov",
+          trending: "🔥 Trendující klíčová slova",
+          search_btn: "🔍 Hledat",
+          suggestions: "Návrhy klíčových slov",
+          copy_all: "📋 Kopírovat vše",
+          export_csv: "⬇️ Exportovat CSV",
+          export_json: "📄 Exportovat JSON",
+          no_results: "❌ Nebyly nalezeny žádné návrhy.",
+          copied: "✅ Všechna klíčová slova zkopírována!",
+          refresh: "🔄 Obnovit",
+        },
+        sk: {
+          title: "Nástroj na výskum kľúčových slov",
+          trending: "🔥 Trendujúce kľúčové slová",
+          search_btn: "🔍 Hľadať",
+          suggestions: "Návrhy kľúčových slov",
+          copy_all: "📋 Kopírovať všetko",
+          export_csv: "⬇️ Exportovať CSV",
+          export_json: "📄 Exportovať JSON",
+          no_results: "❌ Neboli nájdené žiadne návrhy.",
+          copied: "✅ Všetky kľúčové slová skopírované!",
+          refresh: "🔄 Obnoviť",
+        },
+        hu: {
+          title: "Kulcsszó-kutatási eszköz",
+          trending: "🔥 Trendelő kulcsszavak",
+          search_btn: "🔍 Keresés",
+          suggestions: "Kulcsszó-javaslatok",
+          copy_all: "📋 Összes másolása",
+          export_csv: "⬇️ CSV exportálása",
+          export_json: "📄 JSON exportálása",
+          no_results: "❌ Nem találhatók javaslatok.",
+          copied: "✅ Összes kulcsszó másolva!",
+          refresh: "🔄 Frissítés",
+        },
+        ro: {
+          title: "Instrument de cercetare a cuvintelor cheie",
+          trending: "🔥 Cuvinte cheie în tendință",
+          search_btn: "🔍 Căutare",
+          suggestions: "Sugestii de cuvinte cheie",
+          copy_all: "📋 Copiați tot",
+          export_csv: "⬇️ Exportare CSV",
+          export_json: "📄 Exportare JSON",
+          no_results: "❌ Nu au fost găsite sugestii.",
+          copied: "✅ Toate cuvintele cheie copiate!",
+          refresh: "🔄 Reîmprospătare",
+        },
+        bg: {
+          title: "Инструмент за изследване на ключови думи",
+          trending: "🔥 Тренди ключови думи",
+          search_btn: "🔍 Търсене",
+          suggestions: "Предложения за ключови думи",
+          copy_all: "📋 Копирай всички",
+          export_csv: "⬇️ Експортиране CSV",
+          export_json: "📄 Експортиране JSON",
+          no_results: "❌ Не са намерени предложения.",
+          copied: "✅ Всички ключови думи копирани!",
+          refresh: "🔄 Опресняване",
+        },
+        hr: {
+          title: "Alat za istraživanje ključnih reči",
+          trending: "🔥 Trendne ključne reči",
+          search_btn: "🔍 Pretraga",
+          suggestions: "Predlozi ključnih reči",
+          copy_all: "📋 Kopiraj sve",
+          export_csv: "⬇️ Izvezi CSV",
+          export_json: "📄 Izvezi JSON",
+          no_results: "❌ Nema pronađenih predloga.",
+          copied: "✅ Sve ključne reči kopirane!",
+          refresh: "🔄 Osvežavanje",
+        },
+        sr: {
+          title: "Алат за истраживање кључних речи",
+          trending: "🔥 Трендне кључне речи",
+          search_btn: "🔍 Претрага",
+          suggestions: "Предлози кључних речи",
+          copy_all: "📋 Копирај све",
+          export_csv: "⬇️ Извези CSV",
+          export_json: "📄 Извези JSON",
+          no_results: "❌ Нема пронађених предлога.",
+          copied: "✅ Све кључне речи копиране!",
+          refresh: "🔄 Освежавање",
+        },
+        uk: {
+          title: "Інструмент дослідження ключових слів",
+          trending: "🔥 Трендові ключові слова",
+          search_btn: "🔍 Пошук",
+          suggestions: "Пропозиції ключових слів",
+          copy_all: "📋 Копіювати все",
+          export_csv: "⬇️ Експортувати CSV",
+          export_json: "📄 Експортувати JSON",
+          no_results: "❌ Пропозиції не знайдені.",
+          copied: "✅ Усі ключові слова скопійовані!",
+          refresh: "🔄 Оновити",
+        },
+        el: {
+          title: "Εργαλείο έρευνας λέξεων-κλειδιών",
+          trending: "🔥 Λέξεις-κλειδιά τάσης",
+          search_btn: "🔍 Αναζήτηση",
+          suggestions: "Προτάσεις λέξεων-κλειδιών",
+          copy_all: "📋 Αντιγραφή όλων",
+          export_csv: "⬇️ Εξαγωγή CSV",
+          export_json: "📄 Εξαγωγή JSON",
+          no_results: "❌ Δεν βρέθηκαν προτάσεις.",
+          copied: "✅ Όλες οι λέξεις-κλειδιά αντιγράφηκαν!",
+          refresh: "🔄 Ανανέωση",
+        },
+        vi: {
+          title: "Công cụ nghiên cứu từ khóa",
+          trending: "🔥 Từ khóa xu hướng",
+          search_btn: "🔍 Tìm kiếm",
+          suggestions: "Gợi ý từ khóa",
+          copy_all: "📋 Sao chép tất cả",
+          export_csv: "⬇️ Xuất CSV",
+          export_json: "📄 Xuất JSON",
+          no_results: "❌ Không tìm thấy gợi ý.",
+          copied: "✅ Tất cả từ khóa đã sao chép!",
+          refresh: "🔄 Làm mới",
+        },
+        th: {
+          title: "เครื่องมือวิจัยคำหลัก",
+          trending: "🔥 คำหลักที่ได้รับความนิยม",
+          search_btn: "🔍 ค้นหา",
+          suggestions: "คำแนะนำคำหลัก",
+          copy_all: "📋 คัดลอกทั้งหมด",
+          export_csv: "⬇️ ส่งออก CSV",
+          export_json: "📄 ส่งออก JSON",
+          no_results: "❌ ไม่พบคำแนะนำ",
+          copied: "✅ คัดลอกคำหลักทั้งหมดแล้ว!",
+          refresh: "🔄 รีเฟรช",
+        },
+        id: {
+          title: "Alat Penelitian Kata Kunci",
+          trending: "🔥 Kata Kunci Trending",
+          search_btn: "🔍 Cari",
+          suggestions: "Saran Kata Kunci",
+          copy_all: "📋 Salin Semua",
+          export_csv: "⬇️ Ekspor CSV",
+          export_json: "📄 Ekspor JSON",
+          no_results: "❌ Tidak ada saran yang ditemukan.",
+          copied: "✅ Semua kata kunci disalin!",
+          refresh: "🔄 Segarkan",
+        },
+        ms: {
+          title: "Alat Penyelidikan Kata Kunci",
+          trending: "🔥 Kata Kunci Trending",
+          search_btn: "🔍 Cari",
+          suggestions: "Cadangan Kata Kunci",
+          copy_all: "📋 Salin Semua",
+          export_csv: "⬇️ Eksport CSV",
+          export_json: "📄 Eksport JSON",
+          no_results: "❌ Tiada cadangan ditemui.",
+          copied: "✅ Semua kata kunci disalin!",
+          refresh: "🔄 Segarkan",
+        },
+        tl: {
+          title: "Keyword Research Tool",
+          trending: "🔥 Trending Keywords",
+          search_btn: "🔍 Maghanap",
+          suggestions: "Mga Mungkahi ng Keyword",
+          copy_all: "📋 Kopyahin Lahat",
+          export_csv: "⬇️ I-export ang CSV",
+          export_json: "📄 I-export ang JSON",
+          no_results: "❌ Walang mungkahi na nahanap.",
+          copied: "✅ Lahat ng keywords ay nakopya!",
+          refresh: "🔄 I-refresh",
+        },
+        bn: {
+          title: "কীওয়ার্ড গবেষণা সরঞ্জাম",
+          trending: "🔥 ট্রেন্ডিং কীওয়ার্ড",
+          search_btn: "🔍 অনুসন্ধান",
+          suggestions: "কীওয়ার্ড পরামর্শ",
+          copy_all: "📋 সব কপি করুন",
+          export_csv: "⬇️ CSV রপ্তানি করুন",
+          export_json: "📄 JSON রপ্তানি করুন",
+          no_results: "❌ কোন পরামর্শ পাওয়া যায়নি।",
+          copied: "✅ সমস্ত কীওয়ার্ড অনুলিপি করা হয়েছে!",
+          refresh: "🔄 রিফ্রেশ করুন",
+        },
+        pa: {
+          title: "ਕੀਵਰਡ ਖੋਜ ਸਾਧਨ",
+          trending: "🔥 ਟ੍ਰੈਂਡਿੰਗ ਕੀਵਰਡ",
+          search_btn: "🔍 ਖੋਜ",
+          suggestions: "ਕੀਵਰਡ ਸੁਝਾਅ",
+          copy_all: "📋 ਸਭ ਕਾਪੀ ਕਰੋ",
+          export_csv: "⬇️ CSV ਨਿਰਯਾਤ ਕਰੋ",
+          export_json: "📄 JSON ਨਿਰਯਾਤ ਕਰੋ",
+          no_results: "❌ ਕੋਈ ਸੁਝਾਅ ਨਹੀਂ ਮਿਲਿਆ।",
+          copied: "✅ ਸਭ ਕੀਵਰਡ ਕਾਪੀ ਕੀਤੇ ਗਏ!",
+          refresh: "🔄 ਤਾਜ਼ਾ ਕਰੋ",
+        },
+        ta: {
+          title: "முக்கிய சொல் ஆராய்ச்சி கருவி",
+          trending: "🔥 பிரபலமான முக்கிய சொற்கள்",
+          search_btn: "🔍 தேடல்",
+          suggestions: "முக்கிய சொல் பரிந்துரைகள்",
+          copy_all: "📋 அனைத்தையும் நகலெடுக்கவும்",
+          export_csv: "⬇️ CSV ஐ ஏற்றுமதி செய்யவும்",
+          export_json: "📄 JSON ஐ ஏற்றுமதி செய்யவும்",
+          no_results: "❌ பரிந்துரைகள் எதுவும் கிடைக்கவில்லை.",
+          copied: "✅ அனைத்து முக்கிய சொற்கள் நகலெடுக்கப்பட்டுள்ளன!",
+          refresh: "🔄 புதுப்பிக்கவும்",
+        },
+        te: {
+          title: "కీవర్డ్ రీసర్చ్ టూల్",
+          trending: "🔥 ట్రెండింగ్ కీవర్డ్‌లు",
+          search_btn: "🔍 శోధన",
+          suggestions: "కీవర్డ్ సూచనలు",
+          copy_all: "📋 అన్నీ కాపీ చేయండి",
+          export_csv: "⬇️ CSV ను ఎగుమతి చేయండి",
+          export_json: "📄 JSON ను ఎగుమతి చేయండి",
+          no_results: "❌ సూచనలు కనుగొనబడలేదు.",
+          copied: "✅ అన్ని కీవర్డ్‌లు కాపీ చేయబడ్డాయి!",
+          refresh: "🔄 రిఫ్రెష్ చేయండి",
+        },
+        kn: {
+          title: "ಕೀವರ್ಡ್ ಸಂಶೋಧನ ಸಾಧನ",
+          trending: "🔥 ಟ್ರೆಂಡಿಂಗ್ ಕೀವರ್ಡ್‌ಗಳು",
+          search_btn: "🔍 ಹುಡುಕು",
+          suggestions: "ಕೀವರ್ಡ್ ಸಲಹೆಗಳು",
+          copy_all: "📋 ಎಲ್ಲವನ್ನೂ ನಕಲಿಸಿ",
+          export_csv: "⬇️ CSV ರಫ್ತು ಮಾಡಿ",
+          export_json: "📄 JSON ರಫ್ತು ಮಾಡಿ",
+          no_results: "❌ ಸಲಹೆಗಳು ಕಂಡುಬಂದಿಲ್ಲ.",
+          copied: "✅ ಎಲ್ಲಾ ಕೀವರ್ಡ್‌ಗಳನ್ನು ನಕಲಿಸಲಾಗಿದೆ!",
+          refresh: "🔄 ರಿಫ್ರೆಶ್ ಮಾಡಿ",
+        },
+        ml: {
+          title: "കീവേഡ് ഗവേഷണ ഉപകരണം",
+          trending: "🔥 ട്രെൻഡിംഗ് കീവേഡുകൾ",
+          search_btn: "🔍 തിരയുക",
+          suggestions: "കീവേഡ് നിർദ്ദേശങ്ങൾ",
+          copy_all: "📋 എല്ലാം പകർത്തുക",
+          export_csv: "⬇️ CSV കയറ്റുമതി ചെയ്യുക",
+          export_json: "📄 JSON കയറ്റുമതി ചെയ്യുക",
+          no_results: "❌ നിർദ്ദേശങ്ങൾ കണ്ടെത്തിയില്ല.",
+          copied: "✅ എല്ലാ കീവേഡുകളും പകർത്തിയിരിക്കുന്നു!",
+          refresh: "🔄 പുതുക്കുക",
+        },
+        ur: {
+          title: "کلیدی لفظ تحقیق کا ٹول",
+          trending: "🔥 رجحان کے کلیدی الفاظ",
+          search_btn: "🔍 تلاش",
+          suggestions: "کلیدی لفظ کی تجاویز",
+          copy_all: "📋 سب کو کاپی کریں",
+          export_csv: "⬇️ CSV برآمد کریں",
+          export_json: "📄 JSON برآمد کریں",
+          no_results: "❌ کوئی تجاویز نہیں ملیں۔",
+          copied: "✅ تمام کلیدی الفاظ کاپی ہو گئے!",
+          refresh: "🔄 تازہ کریں",
+        },
+        he: {
+          title: "כלי מחקר מילות מפתח",
+          trending: "🔥 מילות מפתח בטרנד",
+          search_btn: "🔍 חיפוש",
+          suggestions: "הצעות מילות מפתח",
+          copy_all: "📋 העתק הכל",
+          export_csv: "⬇️ ייצוא CSV",
+          export_json: "📄 ייצוא JSON",
+          no_results: "❌ לא נמצאו הצעות.",
+          copied: "✅ כל מילות המפתח הועתקו!",
+          refresh: "🔄 רענן",
+        },
+        fa: {
+          title: "ابزار تحقیق کلمات کلیدی",
+          trending: "🔥 کلمات کلیدی در حال رونق",
+          search_btn: "🔍 جستجو",
+          suggestions: "پیشنهادات کلمات کلیدی",
+          copy_all: "📋 کپی کردن همه",
+          export_csv: "⬇️ صادرات CSV",
+          export_json: "📄 صادرات JSON",
+          no_results: "❌ هیچ پیشنهادی یافت نشد.",
+          copied: "✅ تمام کلمات کلیدی کپی شدند!",
+          refresh: "🔄 تازه کردن",
+        },
+        sw: {
+          title: "Zana ya Utafiti wa Maneno Muhimu",
+          trending: "🔥 Maneno Muhimu Yanayosimulia",
+          search_btn: "🔍 Tafuta",
+          suggestions: "Mapendekezo ya Maneno Muhimu",
+          copy_all: "📋 Nakili Yote",
+          export_csv: "⬇️ Hamisha CSV",
+          export_json: "📄 Hamisha JSON",
+          no_results: "❌ Hakuna mapendekezo yaliyopatikana.",
+          copied: "✅ Maneno yote muhimu yamenakilishwa!",
+          refresh: "🔄 Onyesha Upya",
+        },
+        am: {
+          title: "ቁልፍ ቃል ምርምር መሳሪያ",
+          trending: "🔥 ተወዳጅ ቁልፍ ቃላት",
+          search_btn: "🔍 ፈልግ",
+          suggestions: "ቁልፍ ቃል ምክር",
+          copy_all: "📋 ሁሉንም ቅዳ",
+          export_csv: "⬇️ CSV ላክ",
+          export_json: "📄 JSON ላክ",
+          no_results: "❌ ምክር አልተገኘም።",
+          copied: "✅ ሁሉም ቁልፍ ቃላት ተቅድሰዋል!",
+          refresh: "🔄 ታዝብ",
+        },
+        yo: {
+          title: "Irinṣẹ Itupalẹ Ọrọ Pataki",
+          trending: "🔥 Ọrọ Pataki Ọjọ Iwaju",
+          search_btn: "🔍 Wa",
+          suggestions: "Ẹbun Ọrọ Pataki",
+          copy_all: "📋 Daakọ Gbogbo",
+          export_csv: "⬇️ Gbe CSV",
+          export_json: "📄 Gbe JSON",
+          no_results: "❌ Ẹbun ko ri.",
+          copied: "✅ Gbogbo ọrọ pataki ti daakọ!",
+          refresh: "🔄 Tun Ṣe",
+        },
+        ig: {
+          title: "Ngwá Nyocha Okwu Mkpa",
+          trending: "🔥 Okwu Mkpa Ndị Ọ Bụ Ihe Dị Ugbu A",
+          search_btn: "🔍 Chọọ",
+          suggestions: "Aro Okwu Mkpa",
+          copy_all: "📋 Detuo Ihe Niile",
+          export_csv: "⬇️ Bupu CSV",
+          export_json: "📄 Bupu JSON",
+          no_results: "❌ Enweghị aro achọtara.",
+          copied: "✅ Edetu okwu mkpa niile!",
+          refresh: "🔄 Megharia",
+        },
+        zu: {
+          title: "Ithuluzi Lokucwaninga Amagama Abalulekile",
+          trending: "🔥 Amagama Abalulekile Athandwa",
+          search_btn: "🔍 Sesha",
+          suggestions: "Imininingwane Yamagama Abalulekile",
+          copy_all: "📋 Kopisha Konke",
+          export_csv: "⬇️ Khipha I-CSV",
+          export_json: "📄 Khipha I-JSON",
+          no_results: "❌ Akukho imininingwane etholiwe.",
+          copied: "✅ Konke amagama abalulekile akopishwe!",
+          refresh: "🔄 Vuselela",
+        },
+        af: {
+          title: "Sleutelwoord Navorsingstool",
+          trending: "🔥 Trending Sleutelwoorde",
+          search_btn: "🔍 Soek",
+          suggestions: "Sleutelwoord Voorstelle",
+          copy_all: "📋 Kopieër Alles",
+          export_csv: "⬇️ Voer CSV Uit",
+          export_json: "📄 Voer JSON Uit",
+          no_results: "❌ Geen voorstelle gevind.",
+          copied: "✅ Alle sleutelwoorde gekopieer!",
+          refresh: "🔄 Verfris",
+        },
+        ca: {
+          title: "Eina de Recerca de Paraules Clau",
+          trending: "🔥 Paraules Clau en Tendència",
+          search_btn: "🔍 Cercar",
+          suggestions: "Suggeriments de Paraules Clau",
+          copy_all: "📋 Copiar Tot",
+          export_csv: "⬇️ Exportar CSV",
+          export_json: "📄 Exportar JSON",
+          no_results: "❌ No s'han trobat suggeriments.",
+          copied: "✅ Totes les paraules clau copiades!",
+          refresh: "🔄 Actualitzar",
+        },
+        eu: {
+          title: "Gako-hitzaren Ikerketa Tresna",
+          trending: "🔥 Joera Gako-hitzak",
+          search_btn: "🔍 Bilatu",
+          suggestions: "Gako-hitzaren Iradokizunak",
+          copy_all: "📋 Dena Kopiatu",
+          export_csv: "⬇️ CSV Esportatu",
+          export_json: "📄 JSON Esportatu",
+          no_results: "❌ Ez da iradokizunik aurkitu.",
+          copied: "✅ Gako-hitz guztiak kopiatuta!",
+          refresh: "🔄 Freskatu",
+        },
+        gl: {
+          title: "Ferramenta de Investigación de Palabras Clave",
+          trending: "🔥 Palabras Clave en Tendencia",
+          search_btn: "🔍 Buscar",
+          suggestions: "Suxestións de Palabras Clave",
+          copy_all: "📋 Copiar Todo",
+          export_csv: "⬇️ Exportar CSV",
+          export_json: "📄 Exportar JSON",
+          no_results: "❌ Non se atoparon suxestións.",
+          copied: "✅ Todas as palabras clave copiadas!",
+          refresh: "🔄 Actualizar",
+        },
+      };
+      Object.assign(translations, moreTranslations);
 
-  const suggestions = await getSuggestions(platform, keyword);
+      // ============ THEME MANAGEMENT ============
+      function initTheme() {
+        const savedTheme = localStorage.getItem("ez_theme") || "light";
+        applyTheme(savedTheme);
+      }
 
-  loading.style.display = "none";
+      function applyTheme(theme) {
+        if (theme === "dark") {
+          document.body.classList.add("dark-mode");
+          document.getElementById("themeToggle").textContent = "☀️";
+        } else {
+          document.body.classList.remove("dark-mode");
+          document.getElementById("themeToggle").textContent = "🌙";
+        }
+        localStorage.setItem("ez_theme", theme);
+      }
 
-  if (!suggestions.length) {
-    noResults.style.display = "block";
-    return;
-  }
+      document.getElementById("themeToggle").addEventListener("click", () => {
+        const currentTheme = localStorage.getItem("ez_theme") || "light";
+        applyTheme(currentTheme === "light" ? "dark" : "light");
+      });
 
-  header.style.display = "flex";
-  suggestions.forEach(s => {
-    const div = document.createElement("div");
-    div.className = "result-item";
-    div.textContent = s;
-    resultsGrid.appendChild(div);
-  });
+      // ============ LANGUAGE-SPECIFIC TRENDING KEYWORDS ============
+      const trendingByLanguage = {
+        en: [
+          "AI Tools",
+          "Machine Learning",
+          "Web Development",
+          "SEO Tips",
+          "Digital Marketing",
+          "Content Strategy",
+          "Social Media",
+          "Blogging",
+        ],
+        es: [
+          "Herramientas IA",
+          "Aprendizaje Automático",
+          "Desarrollo Web",
+          "Consejos SEO",
+          "Marketing Digital",
+          "Estrategia de Contenidos",
+          "Redes Sociales",
+          "Blogging",
+        ],
+        fr: [
+          "Outils IA",
+          "Apprentissage Automatique",
+          "Développement Web",
+          "Conseils SEO",
+          "Marketing Numérique",
+          "Stratégie de Contenu",
+          "Médias Sociaux",
+          "Blogging",
+        ],
+        de: [
+          "KI-Tools",
+          "Maschinelles Lernen",
+          "Webentwicklung",
+          "SEO-Tipps",
+          "Digitales Marketing",
+          "Content-Strategie",
+          "Soziale Medien",
+          "Blogging",
+        ],
+        it: [
+          "Strumenti IA",
+          "Apprendimento Automatico",
+          "Sviluppo Web",
+          "Suggerimenti SEO",
+          "Marketing Digitale",
+          "Strategia dei Contenuti",
+          "Social Media",
+          "Blogging",
+        ],
+        pt: [
+          "Ferramentas IA",
+          "Aprendizado de Máquina",
+          "Desenvolvimento Web",
+          "Dicas de SEO",
+          "Marketing Digital",
+          "Estratégia de Conteúdo",
+          "Mídia Social",
+          "Blogging",
+        ],
+        ru: [
+          "Инструменты ИИ",
+          "Машинное обучение",
+          "Веб-разработка",
+          "Советы по SEO",
+          "Цифровой маркетинг",
+          "Стратегия контента",
+          "Социальные сети",
+          "Блоггинг",
+        ],
+        ja: [
+          "AIツール",
+          "機械学習",
+          "ウェブ開発",
+          "SEOのヒント",
+          "デジタルマーケティング",
+          "コンテンツ戦略",
+          "ソーシャルメディア",
+          "ブログ",
+        ],
+        zh: [
+          "AI工具",
+          "机器学习",
+          "网络开发",
+          "SEO提示",
+          "数字营销",
+          "内容策略",
+          "社交媒体",
+          "博客",
+        ],
+        hi: [
+          "AI उपकरण",
+          "मशीन लर्निंग",
+          "वेब विकास",
+          "SEO टिप्स",
+          "डिजिटल मार्केटिंग",
+          "सामग्री रणनीति",
+          "सोशल मीडिया",
+          "ब्लॉगिंग",
+        ],
+        ar: [
+          "أدوات الذكاء الاصطناعي",
+          "التعلم الآلي",
+          "تطوير الويب",
+          "نصائح SEO",
+          "التسويق الرقمي",
+          "استراتيجية المحتوى",
+          "وسائل التواصل الاجتماعي",
+          "التدوين",
+        ],
+        ko: [
+          "AI 도구",
+          "머신러닝",
+          "웹 개발",
+          "SEO 팁",
+          "디지털 마케팅",
+          "콘텐츠 전략",
+          "소셜 미디어",
+          "블로깅",
+        ],
+        tr: [
+          "AI Araçları",
+          "Makine Öğrenmesi",
+          "Web Geliştirme",
+          "SEO İpuçları",
+          "Dijital Pazarlama",
+          "İçerik Stratejisi",
+          "Sosyal Medya",
+          "Blogging",
+        ],
+        pl: [
+          "Narzędzia AI",
+          "Uczenie Maszynowe",
+          "Rozwój Sieci Web",
+          "Porady SEO",
+          "Marketing Cyfrowy",
+          "Strategia Treści",
+          "Media Społeczne",
+          "Blogging",
+        ],
+        nl: [
+          "AI-tools",
+          "Machine Learning",
+          "Webontwikkeling",
+          "SEO-tips",
+          "Digitale Marketing",
+          "Contentstrategie",
+          "Sociale Media",
+          "Blogging",
+        ],
+        sv: [
+          "AI-verktyg",
+          "Maskininlärning",
+          "Webbutveckling",
+          "SEO-tips",
+          "Digital marknadsföring",
+          "Innehållsstrategi",
+          "Sociala medier",
+          "Blogging",
+        ],
+        no: [
+          "AI-verktøy",
+          "Maskinlæring",
+          "Webutvikling",
+          "SEO-tips",
+          "Digital markedsføring",
+          "Innholdsstrategi",
+          "Sosiale medier",
+          "Blogging",
+        ],
+        da: [
+          "AI-værktøjer",
+          "Maskinlæring",
+          "Webudvikling",
+          "SEO-tips",
+          "Digital markedsføring",
+          "Indholdsstrategi",
+          "Sociale medier",
+          "Blogging",
+        ],
+        fi: [
+          "AI-työkalut",
+          "Koneoppiminen",
+          "Web-kehitys",
+          "SEO-vinkkejä",
+          "Digitaalinen markkinointi",
+          "Sisältöstrategia",
+          "Sosiaalinen media",
+          "Blogging",
+        ],
+        cs: [
+          "Nástroje AI",
+          "Strojové učení",
+          "Vývoj webu",
+          "Tipy SEO",
+          "Digitální marketing",
+          "Strategie obsahu",
+          "Sociální média",
+          "Blogging",
+        ],
+        sk: [
+          "Nástroje AI",
+          "Strojové učenie",
+          "Vývoj webu",
+          "Tipy SEO",
+          "Digitálny marketing",
+          "Stratégia obsahu",
+          "Sociálne médiá",
+          "Blogging",
+        ],
+        hu: [
+          "AI-eszközök",
+          "Gépi tanulás",
+          "Webfejlesztés",
+          "SEO-tippek",
+          "Digitális marketing",
+          "Tartalomstratégia",
+          "Közösségi média",
+          "Blogging",
+        ],
+        ro: [
+          "Instrumente AI",
+          "Învățare automată",
+          "Dezvoltare web",
+          "Sfaturi SEO",
+          "Marketing digital",
+          "Strategie de conținut",
+          "Social media",
+          "Blogging",
+        ],
+        bg: [
+          "AI инструменти",
+          "Машинно обучение",
+          "Уеб разработка",
+          "SEO съвети",
+          "Цифров маркетинг",
+          "Стратегия на съдържанието",
+          "Социални медии",
+          "Блогване",
+        ],
+        hr: [
+          "AI alati",
+          "Strojno učenje",
+          "Web razvoj",
+          "SEO saveti",
+          "Digitalni marketing",
+          "Strategija sadržaja",
+          "Društvene mreže",
+          "Blogging",
+        ],
+        sr: [
+          "AI алати",
+          "Машинско учење",
+          "Веб развој",
+          "SEO савети",
+          "Дигитални маркетинг",
+          "Стратегија садржаја",
+          "Друштвене мреже",
+          "Блоговање",
+        ],
+        uk: [
+          "Інструменти ШІ",
+          "Машинне навчання",
+          "Веб-розробка",
+          "Поради SEO",
+          "Цифровий маркетинг",
+          "Стратегія контенту",
+          "Соціальні мережі",
+          "Блогування",
+        ],
+        el: [
+          "Εργαλεία ΤΝ",
+          "Μηχανική Μάθηση",
+          "Ανάπτυξη Ιστού",
+          "Συμβουλές SEO",
+          "Ψηφιακό Μάρκετινγκ",
+          "Στρατηγική Περιεχομένου",
+          "Κοινωνικά Μέσα",
+          "Ιστολογία",
+        ],
+        vi: [
+          "Công cụ AI",
+          "Học máy",
+          "Phát triển web",
+          "Mẹo SEO",
+          "Tiếp thị kỹ thuật số",
+          "Chiến lược nội dung",
+          "Phương tiện truyền thông xã hội",
+          "Viết blog",
+        ],
+        th: [
+          "เครื่องมือ AI",
+          "การเรียนรู้ของเครื่อง",
+          "การพัฒนาเว็บ",
+          "เคล็ดลับ SEO",
+          "การตลาดดิจิทัล",
+          "กลยุทธ์เนื้อหา",
+          "สื่อสังคม",
+          "บล็อกกิ้ง",
+        ],
+        id: [
+          "Alat AI",
+          "Pembelajaran Mesin",
+          "Pengembangan Web",
+          "Tips SEO",
+          "Pemasaran Digital",
+          "Strategi Konten",
+          "Media Sosial",
+          "Blogging",
+        ],
+        ms: [
+          "Alat AI",
+          "Pembelajaran Mesin",
+          "Pembangunan Web",
+          "Petua SEO",
+          "Pemasaran Digital",
+          "Strategi Kandungan",
+          "Media Sosial",
+          "Blogging",
+        ],
+        tl: [
+          "AI Tools",
+          "Machine Learning",
+          "Web Development",
+          "SEO Tips",
+          "Digital Marketing",
+          "Content Strategy",
+          "Social Media",
+          "Blogging",
+        ],
+        bn: [
+          "AI সরঞ্জাম",
+          "মেশিন লার্নিং",
+          "ওয়েব ডেভেলপমেন্ট",
+          "SEO টিপস",
+          "ডিজিটাল মার্কেটিং",
+          "কন্টেন্ট কৌশল",
+          "সোশ্যাল মিডিয়া",
+          "ব্লগিং",
+        ],
+        pa: [
+          "AI ਸਾਧਨ",
+          "ਮਸ਼ੀਨ ਲਰਨਿੰਗ",
+          "ਵੈਬ ਡਿਵੈਲਪਮੈਂਟ",
+          "SEO ਸੁਝਾਅ",
+          "ਡਿਜੀਟਲ ਮਾਰਕੀਟਿੰਗ",
+          "ਸਮੱਗਰੀ ਰਣਨੀਤੀ",
+          "ਸੋਸ਼ਲ ਮੀਡੀਆ",
+          "ਬਲੌਗਿੰਗ",
+        ],
+        ta: [
+          "AI கருவிகள்",
+          "இயந்திர கற்றல்",
+          "வலை மேம்பாடு",
+          "SEO குறிப்புகள்",
+          "டிজிটல் மার்க்கெட்டிங்",
+          "உள்ளடக்க கৌশலம்",
+          "சமூக ஊடகம்",
+          "ব্লগিং",
+        ],
+        te: [
+          "AI సాధనాలు",
+          "మెషిన్ లర్నింగ్",
+          "వెబ్ డెవలప్‌మెంట్",
+          "SEO చిట్కాలు",
+          "డిజిటల్ మార్కెటింగ్",
+          "కంటెంట్ స్ట్రాటజీ",
+          "సోషల్ మీడియా",
+          "బ్లాగింగ్",
+        ],
+        kn: [
+          "AI ಸಾಧನಗಳು",
+          "ಯಂತ್ರ ಕಲಿಕೆ",
+          "ವೆಬ್ ಅಭಿವೃದ್ಧಿ",
+          "SEO ಸುಳಿವುಗಳು",
+          "ಡಿಜಿಟಲ್ ಮಾರ್ಕೆಟಿಂಗ್",
+          "ಸಾಮಗ್ರಿ ಕೌಶಲ್ಯ",
+          "ಸಾಮಾಜಿಕ ಮಾಧ್ಯಮ",
+          "ಬ್ಲಾಗಿಂಗ್",
+        ],
+        ml: [
+          "AI ഉപകരണങ്ങൾ",
+          "മെഷീൻ ലേണിംഗ്",
+          "വെബ് ഡെവലപ്‌മെന്റ്",
+          "SEO നുറുങ്ങുകൾ",
+          "ഡിജിറ്റൽ മാർക്കെറ്റിംഗ്",
+          "കണ്ടന്റ് സ്ട്രാറ്റജി",
+          "സോഷ്യൽ മീഡിയ",
+          "ബ്ലോഗിംഗ്",
+        ],
+        ur: [
+          "AI ٹولز",
+          "مشین لرننگ",
+          "ویب ڈیولپمنٹ",
+          "SEO ٹپس",
+          "ڈیجیٹل مارکیٹنگ",
+          "مواد کی حکمت عملی",
+          "سوشل میڈیا",
+          "بلاگنگ",
+        ],
+        he: [
+          "כלים AI",
+          "למידת מכונה",
+          "פיתוח אתרים",
+          "טיפים SEO",
+          "שיווק דיגיטלי",
+          "אסטרטגיית תוכן",
+          "מדיה חברתית",
+          "בלוגינג",
+        ],
+        fa: [
+          "ابزارهای AI",
+          "یادگیری ماشین",
+          "توسعه وب",
+          "نکات SEO",
+          "بازاریابی دیجیتال",
+          "استراتژی محتوا",
+          "رسانه های اجتماعی",
+          "وبلاگ نویسی",
+        ],
+        sw: [
+          "Zana za AI",
+          "Ujifunzaji wa Mashine",
+          "Maendeleo ya Wavuti",
+          "Vidokezo vya SEO",
+          "Uuzaji wa Kidijitali",
+          "Mkakati wa Maudhui",
+          "Mitandao ya Kijamii",
+          "Blogging",
+        ],
+        am: [
+          "AI መሳሪያዎች",
+          "ማሽን ትምህርት",
+          "ድር ልማት",
+          "SEO ምክር",
+          "ዲጂታል ግብይት",
+          "ይዘት ስትራቴጂ",
+          "ማህበራዊ ሚዲያ",
+          "ብሎግ",
+        ],
+        yo: [
+          "Àwọn Irinṣẹ AI",
+          "Ẹkọ Ẹrọ",
+          "Idagbasoke Wẹẹbu",
+          "Àwọn Ìmọ̀ SEO",
+          "Ìtajà Dijitali",
+          "Ilana Akoonu",
+          "Awọn Olusokan Ẹgbẹ",
+          "Blogging",
+        ],
+        ig: [
+          "Ngwá AI",
+          "Ịmụta Ngwá",
+          "Mmepe Weebụ",
+          "Aro SEO",
+          "Azụmahịa Dijitali",
+          "Atụmatụ Ihe Odide",
+          "Ọrụ Mmekọrịta",
+          "Blogging",
+        ],
+        zu: [
+          "Izinsizane ze-AI",
+          "Ukufunda Kwemishini",
+          "Ukuthuthukiswa kweWebhu",
+          "Imikhakha ye-SEO",
+          "Ukumaketha Kwedijithali",
+          "Isixwayiso Sokuqukethwa",
+          "Izinkundla Zokuxhumana",
+          "Blogging",
+        ],
+        af: [
+          "AI-gereedskap",
+          "Masjienlearning",
+          "Webontwikkeling",
+          "SEO-wenke",
+          "Digitale Bemarking",
+          "Inhoudsstrategieë",
+          "Sosiale Media",
+          "Blogging",
+        ],
+        ca: [
+          "Eines IA",
+          "Aprenentatge Automàtic",
+          "Desenvolupament Web",
+          "Consells SEO",
+          "Màrqueting Digital",
+          "Estratègia de Contingut",
+          "Xarxes Socials",
+          "Blogging",
+        ],
+        eu: [
+          "AI Tresnak",
+          "Makina Ikasketa",
+          "Web Garapena",
+          "SEO Aholkuak",
+          "Marketing Digitala",
+          "Eduki Estrategia",
+          "Sare Sozialak",
+          "Blogging",
+        ],
+        gl: [
+          "Ferramentas IA",
+          "Aprendizaxe Automática",
+          "Desenvolvemento Web",
+          "Consellos SEO",
+          "Marketing Dixital",
+          "Estratexia de Contidos",
+          "Redes Sociais",
+          "Blogging",
+        ],
+      };
 
-  // Copy and Export
-  document.getElementById("copyBtn").onclick = () => {
-    const text = suggestions.join("\n");
-    navigator.clipboard.writeText(text);
-    alert("✅ All keywords copied!");
-  };
+      // ============ LANGUAGE & TRENDING ============
+      async function fetchTrendingKeywords(lang = "en") {
+        try {
+          const keywords = trendingByLanguage[lang] || trendingByLanguage["en"];
+          const trendList = document.getElementById("trendList");
+          trendList.innerHTML = "";
+          keywords.forEach((keyword) => {
+            const span = document.createElement("span");
+            span.textContent = keyword;
+            span.addEventListener("click", () => {
+              document.getElementById("keyword").value = keyword;
+              document.getElementById("searchBtn").click();
+            });
+            trendList.appendChild(span);
+          });
+        } catch (err) {
+          console.error("Error fetching trends:", err);
+        }
+      }
 
-  document.getElementById("exportBtn").onclick = () => {
-    const csv = "data:text/csv;charset=utf-8," + suggestions.map(k => `"${k}"`).join("\n");
-    const a = document.createElement("a");
-    a.href = encodeURI(csv);
-    a.download = `${keyword}_keywords.csv`;
-    a.click();
-  };
-});
-</script>
-<script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebApplication",
-  "name": "EZToolsKit Keyword Research Tool",
-  "url": "https://eztoolskit.com/keyword-research-tool.html",
-  "applicationCategory": "SEO Tool",
-  "operatingSystem": "All",
-  "aggregateRating": {
-    "@type": "AggregateRating",
-    "ratingValue": "4.9",
-    "reviewCount": "520"
-  }
-}
-</script>
+      document.getElementById("language").addEventListener("change", (e) => {
+        const lang = e.target.value;
+        localStorage.setItem("ez_lang", lang);
+        updateUITranslations(lang);
+        fetchTrendingKeywords(lang);
+      });
+
+      document.getElementById("refreshTrends").addEventListener("click", () => {
+        const lang = document.getElementById("language").value;
+        fetchTrendingKeywords(lang);
+      });
+
+      // ============ TRANSLATION HELPER ============
+      async function translateText(text, targetLang) {
+        if (targetLang === "en") return text;
+        try {
+          const response = await fetch(
+            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
+              text
+            )}&langpair=en|${targetLang}`
+          );
+          const data = await response.json();
+          return data.responseData.translatedText || text;
+        } catch (err) {
+          return text;
+        }
+      }
+
+      async function translateToEnglish(text, sourceLang) {
+        if (sourceLang === "en") return text;
+        try {
+          const response = await fetch(
+            `https://api.mymemory.translated.net/get?q=${encodeURIComponent(
+              text
+            )}&langpair=${sourceLang}|en`
+          );
+          const data = await response.json();
+          return data.responseData.translatedText || text;
+        } catch (err) {
+          return text;
+        }
+      }
+
+      // ============ SEARCH FUNCTIONALITY ============
+      async function getSuggestions(query, lang = "en") {
+        try {
+          // Translate query to English if needed
+          const englishQuery =
+            lang !== "en" ? await translateToEnglish(query, lang) : query;
+
+          const url = `https://api.datamuse.com/words?ml=${encodeURIComponent(
+            englishQuery
+          )}&max=25`;
+          const res = await fetch(url);
+          const data = await res.json();
+          let suggestions = Array.isArray(data)
+            ? data.map((item) => item.word)
+            : [];
+
+          // Translate results back to selected language if needed
+          if (lang !== "en" && suggestions.length > 0) {
+            suggestions = await Promise.all(
+              suggestions.map((s) => translateText(s, lang))
+            );
+          }
+
+          return suggestions;
+        } catch (err) {
+          console.error("Error:", err);
+          return [];
+        }
+      }
+
+      const searchBtn = document.getElementById("searchBtn");
+      const keywordInput = document.getElementById("keyword");
+      const resultsGrid = document.getElementById("results");
+      const header = document.getElementById("resultsHeader");
+      const loading = document.getElementById("loading");
+      const noResults = document.getElementById("noResults");
+
+      // ============ UPDATE UI TRANSLATIONS ============
+      function updateUITranslations(lang) {
+        const t = translations[lang] || translations["en"];
+        document.getElementById("pageTitle").textContent = t.title;
+        document.getElementById("pageSubtitle").textContent = t.subtitle;
+        document.getElementById("searchBtn").textContent = t.search_btn;
+        document.getElementById("keyword").placeholder = t.placeholder;
+        document.getElementById("refreshTrends").textContent = t.refresh;
+        document.getElementById("loading").textContent = t.loading;
+        document.getElementById("noResults").textContent = t.no_results;
+      }
+
+      searchBtn.addEventListener("click", async () => {
+        const keyword = keywordInput.value.trim();
+        const lang = document.getElementById("language").value;
+        if (!keyword) return alert("Please enter a keyword");
+
+        resultsGrid.innerHTML = "";
+        header.style.display = "none";
+        noResults.style.display = "none";
+        loading.style.display = "block";
+
+        const suggestions = await getSuggestions(keyword, lang);
+        loading.style.display = "none";
+
+        if (!suggestions.length) {
+          noResults.style.display = "block";
+          return;
+        }
+
+        localStorage.setItem("ez_keyword", keyword);
+        localStorage.setItem("ez_results", JSON.stringify(suggestions));
+
+        resultsGrid.innerHTML = "";
+        header.style.display = "flex";
+        const t = translations[lang] || translations["en"];
+
+        suggestions.forEach((s) => {
+          const div = document.createElement("div");
+          div.className = "result-item";
+          div.textContent = s;
+          div.addEventListener("click", () => {
+            navigator.clipboard.writeText(s);
+            div.textContent = "✅ Copied!";
+            setTimeout(() => {
+              div.textContent = s;
+            }, 1500);
+          });
+          resultsGrid.appendChild(div);
+        });
+
+        document.getElementById("copyBtn").onclick = () => {
+          navigator.clipboard.writeText(suggestions.join("\n"));
+          alert(t.copied);
+        };
+
+        document.getElementById("exportBtn").onclick = () => {
+          const csv =
+            "data:text/csv;charset=utf-8," +
+            suggestions.map((k) => `"${k}"`).join("\n");
+          const a = document.createElement("a");
+          a.href = encodeURI(csv);
+          a.download = `keywords_${keyword}.csv`;
+          a.click();
+        };
+
+        document.getElementById("exportJson").onclick = () => {
+          const json = JSON.stringify(
+            { keywords: suggestions, exported: new Date().toISOString() },
+            null,
+            2
+          );
+          const blob = new Blob([json], { type: "application/json" });
+          const url = URL.createObjectURL(blob);
+          const a = document.createElement("a");
+          a.href = url;
+          a.download = `keywords_${keyword}.json`;
+          a.click();
+        };
+      });
+
+      // ============ AUTO-DETECT USER REGION & LANGUAGE ============
+      async function detectUserRegion() {
+        try {
+          // Try to detect region (optional, won't break if fails)
+          try {
+            const response = await fetch("https://ipapi.co/json/", {
+              timeout: 3000,
+            });
+            if (response.ok) {
+              const data = await response.json();
+              const country = data.country_name || "Unknown";
+              document.getElementById(
+                "userLocation"
+              ).textContent = `📍 ${country}`;
+            }
+          } catch (e) {
+            // Silently fail - region detection is optional
+            document.getElementById("userLocation").textContent = "📍 Global";
+          }
+
+          // Auto-detect language based on browser
+          const browserLang = navigator.language.split("-")[0];
+          const supportedLangs = Object.keys(translations);
+          const detectedLang = supportedLangs.includes(browserLang)
+            ? browserLang
+            : "en";
+
+          const savedLang = localStorage.getItem("ez_lang") || detectedLang;
+          document.getElementById("language").value = savedLang;
+          fetchTrendingKeywords(savedLang);
+        } catch (err) {
+          console.error("Error detecting region:", err);
+          const savedLang = localStorage.getItem("ez_lang") || "en";
+          document.getElementById("language").value = savedLang;
+          fetchTrendingKeywords(savedLang);
+        }
+      }
+
+      // ============ INITIALIZATION ============
+      window.addEventListener("load", () => {
+        initTheme();
+        detectUserRegion();
+
+        const lang = document.getElementById("language").value;
+        updateUITranslations(lang);
+
+        const lastKeyword = localStorage.getItem("ez_keyword");
+        if (lastKeyword) {
+          keywordInput.value = lastKeyword;
+        }
+      });
+    </script>
+  </body>
+</html>
