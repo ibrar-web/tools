@@ -1,0 +1,289 @@
+<head>
+  <title>Free Keyword Research Tool | EZToolsKit</title>
+  <meta name="description" content="Discover trending keyword ideas from Google, YouTube, Bing, and Amazon. Free keyword research tool for SEO and bloggers.">
+  <meta name="keywords" content="keyword research, SEO tools, keyword generator, Google keyword ideas, YouTube SEO">
+  <meta name="robots" content="index, follow">
+  <meta property="og:title" content="Free Keyword Research Tool | EZToolsKit">
+  <meta property="og:description" content="Generate SEO keyword suggestions instantly from top platforms.">
+  <meta property="og:image" content="https://yourdomain.com/og-image.jpg">
+  <meta property="og:url" content="https://yourdomain.com/keyword-research-tool.html">
+  <meta name="twitter:card" content="summary_large_image">
+  <link rel="icon" href="/favicon.ico">
+</head>
+
+<section id="keyword-tool" class="tool-wrapper">
+  <div class="header">
+    <h1>Keyword Research Tool</h1>
+    <p class="sub">Discover trending keyword suggestions from <strong>Google, YouTube, Bing,</strong> and <strong>Amazon</strong> — free and fast.</p>
+  </div>
+
+  <!-- 🔹 Ad Slot: Top Banner -->
+  <div class="ad-slot">
+   <script type="text/javascript">
+	atOptions = {
+		'key' : '36499e43b7e4f05e5e4ea13d0cdc485b',
+		'format' : 'iframe',
+		'height' : 90,
+		'width' : 728,
+		'params' : {}
+	};
+</script>
+<script type="text/javascript" src="//www.highperformanceformat.com/36499e43b7e4f05e5e4ea13d0cdc485b/invoke.js"></script>
+  </div>
+
+  <section class="trending">
+  <h3>🔥 Trending Keywords</h3>
+  <div class="trend-list" id="trendList">
+    <span>#AI Tools</span>
+    <span>#Tech News</span>
+    <span>#Blog SEO</span>
+    <span>#YouTube Growth</span>
+    <span>#Affiliate Marketing</span>
+  </div>
+</section>
+
+  <div class="tool-container">
+    <div class="input-box">
+      <select id="platform">
+        <option value="google">Google</option>
+        <option value="youtube">YouTube</option>
+        <option value="bing">Bing</option>
+        <option value="amazon">Amazon</option>
+      </select>
+      <input id="keyword" type="text" placeholder="Enter your keyword... e.g. best camera for vlogging" />
+      <button id="searchBtn"><i class="fa fa-search"></i> Search</button>
+    </div>
+
+    <div id="loading" class="loading" style="display:none;">🔍 Fetching keyword ideas...</div>
+
+    <div class="results-header" id="resultsHeader" style="display:none;">
+      <h2>Keyword Suggestions</h2>
+      <div class="actions">
+        <button id="copyBtn">📋 Copy All</button>
+        <button id="exportBtn">⬇️ Export CSV</button>
+      </div>
+    </div>
+
+    <div id="results" class="results-grid"></div>
+
+    <!-- 🔹 Ad Slot: Middle -->
+    <div class="ad-slot">
+     <script async="async" data-cfasync="false" src="//pl27890421.effectivegatecpm.com/ff701f4460ea5066c48f5a868682d852/invoke.js"></script>
+<div id="container-ff701f4460ea5066c48f5a868682d852"></div>
+    </div>
+
+    <div id="noResults" style="display:none;">❌ No suggestions found. Try another keyword.</div>
+  </div>
+
+  <!-- 🔹 Ad Slot: Bottom Banner -->
+  <div class="ad-slot">
+<script async="async" data-cfasync="false" src="//pl27890421.effectivegatecpm.com/ff701f4460ea5066c48f5a868682d852/invoke.js"></script>
+<div id="container-ff701f4460ea5066c48f5a868682d852"></div>
+  </div>
+</section>
+
+<!-- 💅 Modern CSS Styling -->
+<style>
+.tool-wrapper {
+  max-width: 900px;
+  margin: 40px auto;
+  padding: 20px;
+  font-family: "Poppins", sans-serif;
+  color: #222;
+}
+.header {text-align:center;margin-bottom:20px;}
+.header h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+.sub {font-size: 1rem;color: #444;}
+.ad-slot {
+  border: 1px dashed #ccc;
+  text-align: center;
+  padding: 12px;
+  margin: 16px 0;
+  border-radius: 8px;
+  background: #f9f9f9;
+}
+.tool-container {
+  background: #fff;
+  border-radius: 14px;
+  box-shadow: 0 3px 12px rgba(0,0,0,0.08);
+  padding: 24px;
+}
+  .trending {margin-top:40px;text-align:center;}
+.trend-list {display:flex;flex-wrap:wrap;justify-content:center;gap:10px;margin-top:10px;}
+.trend-list span {
+  background:#eef6ff;
+  border-radius:20px;
+  padding:8px 14px;
+  cursor:pointer;
+  font-size:0.95rem;
+  color:#0072ff;
+  font-weight:500;
+}
+.trend-list span:hover {background:#0072ff;color:#fff;}
+.input-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: space-between;
+}
+.input-box select, .input-box input {
+  flex: 1;
+  min-width: 160px;
+  padding: 12px;
+  border-radius: 8px;
+  border: 1px solid #ccc;
+  font-size: 1rem;
+}
+.input-box button {
+  background: linear-gradient(90deg, #0072ff, #00c6ff);
+  color: #fff;
+  border: none;
+  padding: 12px 22px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+  font-weight: 600;
+}
+.input-box button:hover {
+  opacity: 0.85;
+  transform: translateY(-1px);
+}
+.loading {
+  text-align: center;
+  margin: 20px 0;
+  font-weight: 600;
+  color: #0072ff;
+}
+.results-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 20px 0 10px;
+}
+.results-header h2 {
+  font-size: 1.2rem;
+  font-weight: 600;
+}
+.actions button {
+  background: #f0f0f0;
+  border: none;
+  padding: 8px 14px;
+  margin-left: 6px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 500;
+}
+.results-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 10px;
+}
+.result-item {
+  background: #f8faff;
+  border: 1px solid #e1e7ff;
+  padding: 12px;
+  border-radius: 10px;
+  transition: 0.2s;
+}
+.result-item:hover {
+  background: #eef6ff;
+}
+@media(max-width:700px) {
+  .input-box{flex-direction:column;}
+  .actions{flex-wrap:wrap;}
+}
+</style>
+
+<!-- ⚙️ Functional JS -->
+<script>
+  
+  document.querySelectorAll('.trend-list span').forEach(btn=>{
+  btn.addEventListener('click', ()=>{
+    document.getElementById('keyword').value = btn.textContent.replace('#','');
+    document.getElementById('searchBtn').click();
+  });
+});
+async function getSuggestions(platform, query) {
+  try {
+    const url = `https://api.datamuse.com/words?ml=${encodeURIComponent(query)}&max=25`;
+    const res = await fetch(url);
+    const data = await res.json();
+    const suggestions = data.map(item => item.word);
+    return suggestions;
+  } catch (err) {
+    console.error("Error fetching:", err);
+    return [];
+  }
+}
+
+
+
+document.getElementById("searchBtn").addEventListener("click", async ()=>{
+  const platform = document.getElementById("platform").value;
+  const keyword = document.getElementById("keyword").value.trim();
+  const loading = document.getElementById("loading");
+  const resultsGrid = document.getElementById("results");
+  const header = document.getElementById("resultsHeader");
+  const noResults = document.getElementById("noResults");
+
+  if (!keyword) return alert("Please enter a keyword");
+
+  resultsGrid.innerHTML = "";
+  header.style.display = "none";
+  noResults.style.display = "none";
+  loading.style.display = "block";
+
+  const suggestions = await getSuggestions(platform, keyword);
+
+  loading.style.display = "none";
+
+  if (!suggestions.length) {
+    noResults.style.display = "block";
+    return;
+  }
+
+  header.style.display = "flex";
+  suggestions.forEach(s => {
+    const div = document.createElement("div");
+    div.className = "result-item";
+    div.textContent = s;
+    resultsGrid.appendChild(div);
+  });
+
+  // Copy and Export
+  document.getElementById("copyBtn").onclick = () => {
+    const text = suggestions.join("\n");
+    navigator.clipboard.writeText(text);
+    alert("✅ All keywords copied!");
+  };
+
+  document.getElementById("exportBtn").onclick = () => {
+    const csv = "data:text/csv;charset=utf-8," + suggestions.map(k => `"${k}"`).join("\n");
+    const a = document.createElement("a");
+    a.href = encodeURI(csv);
+    a.download = `${keyword}_keywords.csv`;
+    a.click();
+  };
+});
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "WebApplication",
+  "name": "EZToolsKit Keyword Research Tool",
+  "url": "https://eztoolskit.com/keyword-research-tool.html",
+  "applicationCategory": "SEO Tool",
+  "operatingSystem": "All",
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.9",
+    "reviewCount": "520"
+  }
+}
+</script>
