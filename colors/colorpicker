@@ -1,0 +1,265 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Ultimate Online Color Picker 2025 – Live Contrast & Multi-Color Palette</title>
+<meta name="description" content="Ultimate free online color picker 2025 with circular color wheel, HEX & RGB, shades, tints, drag & drop multi-color palette, gradient preview, preset color schemes, WCAG contrast warnings, live text preview, and export options. Perfect for designers & developers.">
+<meta name="keywords" content="color picker, circular color wheel, HEX color, RGB color, color shades, gradient generator, color palette, multi-color picker, drag and drop palette, designer tool, advanced color picker, free color picker 2025, WCAG contrast, live text preview, export color palette, export PNG">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+body { font-family:'Roboto', sans-serif; margin:0; padding:0; background:#f0f2f5; }
+.container { max-width:950px; margin:40px auto; background:#fff; padding:30px; border-radius:15px; box-shadow:0 6px 20px rgba(0,0,0,0.1); }
+h1 { text-align:center; color:#111; margin-bottom:20px; font-size:2rem; }
+p { text-align:center; color:#555; margin-bottom:25px; font-size:1rem; line-height:1.5; }
+#colorWheel { display:block; margin:20px auto; border-radius:50%; cursor:pointer; box-shadow:0 4px 15px rgba(0,0,0,0.1); }
+.controls { text-align:center; margin-top:20px; }
+input[type="range"] { width:200px; margin:5px; }
+label { margin-right:5px; }
+#colorInfo { text-align:center; margin-top:15px; font-size:16px; }
+#colorInfo span { display:block; margin:5px 0; }
+button.copy-btn, button.copy-palette, button.export-btn, button.add-btn { padding:8px 16px; margin:5px; border:none; border-radius:8px; background:linear-gradient(45deg,#FF416C,#FF4B2B); color:#fff; cursor:pointer; transition:0.3s; }
+button.copy-btn:hover, button.copy-palette:hover, button.export-btn:hover, button.add-btn:hover { opacity:0.9; }
+#shadesContainer, #paletteContainer, #presetContainer, #multiPaletteContainer { display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-top:20px; }
+.shade-box, .palette-box, .multi-palette-box { width:60px; height:60px; border-radius:8px; border:1px solid #ccc; cursor:pointer; transition:0.3s; display:flex; flex-direction:column; align-items:center; justify-content:center; font-size:14px; color:#fff; font-weight:bold; text-shadow:0 0 3px #000; position:relative; }
+.shade-box:hover, .palette-box:hover, .multi-palette-box:hover { transform:scale(1.1); }
+.contrast-badge { position:absolute; bottom:2px; right:2px; padding:1px 4px; font-size:10px; border-radius:3px; background:#0008; color:#fff; font-weight:bold; }
+#gradientPreview { height:80px; margin:20px auto; border-radius:12px; width:90%; border:1px solid #ccc; box-shadow:inset 0 3px 8px rgba(0,0,0,0.1); }
+.ad-section { text-align:center; margin:20px 0; }
+/* Modal */
+.modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.6); display:flex; justify-content:center; align-items:center; }
+.modal-content { background:#fff; padding:20px; border-radius:10px; max-width:500px; text-align:center; position:relative; }
+/* Responsive */
+@media(max-width:600px){
+  input[type="range"] { width:90%; }
+  #colorWheel { width:250px; height:250px; }
+  .shade-box, .palette-box, .multi-palette-box { width:50px; height:50px; font-size:12px; }
+}
+</style>
+</head>
+<body>
+
+<div class="container" id="toolContainer">
+  <h1>Ultimate Online Color Picker 2025</h1>
+  <p>Pick colors with circular color wheel, create palettes, view shades, tints, contrast ratios, gradients, preset color schemes, drag & drop multi-color palette, live text preview, WCAG contrast badges, and export CSS/PNG.</p>
+
+  <!-- Top Banner Ad -->
+  <div class="ad-section">
+    <script type="text/javascript">
+      atOptions = {'key':'36499e43b7e4f05e5e4ea13d0cdc485b','format':'iframe','height':90,'width':728,'params':{}};
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/36499e43b7e4f05e5e4ea13d0cdc485b/invoke.js"></script>
+  </div>
+
+  <!-- Circular Color Wheel -->
+  <canvas id="colorWheel" width="300" height="300"></canvas>
+
+  <!-- Controls -->
+  <div class="controls">
+    <label>Saturation: <span id="satVal">100%</span></label>
+    <input type="range" id="saturation" min="0" max="100" value="100">
+    <label>Lightness: <span id="lightVal">50%</span></label>
+    <input type="range" id="lightness" min="0" max="100" value="50">
+    <label>Format:</label>
+    <select id="formatSelect">
+      <option value="HEX" selected>HEX</option>
+      <option value="RGB">RGB</option>
+    </select>
+  </div>
+
+  <!-- Color Info -->
+  <div id="colorInfo">
+    <span id="selectedColor">HEX: #FFFFFF | RGB: rgb(255,255,255)</span>
+    <span id="contrast">Contrast with White: 1:1 | Contrast with Black: 21:1</span>
+    <button class="copy-btn" id="copyBtn">Copy Color</button>
+    <button class="copy-palette" id="copyPaletteBtn">Copy Palette</button>
+    <button class="export-btn" id="exportBtn">Export Palette (CSS)</button>
+    <button class="export-btn" id="exportPngBtn">Download Palette PNG</button>
+    <button class="add-btn" id="addToMultiBtn">Add to Multi-Color Palette</button>
+  </div>
+
+  <!-- Shades -->
+  <div id="shadesContainer"></div>
+
+  <!-- Palette -->
+  <div id="paletteContainer"></div>
+
+  <!-- Preset Color Schemes -->
+  <h3 style="text-align:center;margin-top:30px;color:#FF4B2B;">Preset Color Schemes</h3>
+  <div id="presetContainer"></div>
+
+  <!-- Gradient Preview -->
+  <div id="gradientPreview"></div>
+
+  <!-- Bottom Banner Ad -->
+  <div class="ad-section">
+    <script type="text/javascript">
+      atOptions = {'key':'205b14a0c2e63baa39d830075ee1ba9d','format':'iframe','height':50,'width':320,'params':{}};
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/205b14a0c2e63baa39d830075ee1ba9d/invoke.js"></script>
+  </div>
+</div>
+
+<!-- Multi-Color Modal -->
+<div id="multiColorModal" class="modal">
+  <div class="modal-content">
+    <h2>Multi-Color Selection</h2>
+    <p>Select multiple colors for your palette</p>
+    <div id="multiPaletteContainer"></div>
+    <button id="addSelectedBtn" class="export-btn">Add Selected Colors</button>
+    <button id="closeModalBtn" class="export-btn" style="background:#555;">Close</button>
+  </div>
+</div>
+
+<script>
+// --- Canvas & Color Functions ---
+const canvas=document.getElementById('colorWheel');
+const ctx=canvas.getContext('2d');
+const radius=canvas.width/2;
+let currentHue=0, currentSat=1, currentLight=0.5;
+
+function hslToRgb(h,s,l){
+  let r,g,b;if(s===0){r=g=b=l;}
+  else{const hue2rgb=(p,q,t)=>{if(t<0)t+=1;if(t>1)t-=1;if(t<1/6)return p+(q-p)*6*t;if(t<1/2)return q;if(t<2/3)return p+(q-p)*(2/3-t)*6;return p;}
+  const q=l<0.5? l*(1+s): l+s-l*s; const p=2*l-q;
+  r=hue2rgb(p,q,h+1/3); g=hue2rgb(p,q,h); b=hue2rgb(p,q,h-1/3);}
+  return [Math.round(r*255),Math.round(g*255),Math.round(b*255)];
+}
+function rgbToHex(r,g,b){return "#"+((1<<24)+(r<<16)+(g<<8)+b).toString(16).slice(1);}
+function hexToRgb(hex){const bigint=parseInt(hex.replace('#',''),16);return [(bigint>>16)&255,(bigint>>8)&255, bigint&255];}
+function contrastRatio(rgb1,rgb2){const lum=(r,g,b)=>{[r,g,b]=[r,g,b].map(c=>{c/=255;return c<=0.03928?c/12.92:Math.pow((c+0.055)/1.055,2.4);});return 0.2126*r+0.7152*g+0.0722*b;};const L1=lum(...rgb1),L2=lum(...rgb2);return L1>L2?(L1+0.05)/(L2+0.05):(L2+0.05)/(L1+0.05);}
+function getWCAGLevel(cr){if(cr>=7) return '✅ AAA'; else if(cr>=4.5) return '⚠ AA'; else return '❌ Fail';}
+
+function drawColorWheel(){
+  const image=ctx.createImageData(canvas.width,canvas.height);
+  for(let y=0;y<canvas.height;y++){for(let x=0;x<canvas.width;x++){
+    const dx=x-radius,dy=y-radius;const distance=Math.sqrt(dx*dx+dy*dy);
+    if(distance<=radius){const angle=Math.atan2(dy,dx);const hue=(angle*180/Math.PI+360)%360;const sat=distance/radius;
+    const [r,g,b]=hslToRgb(hue/360,sat,currentLight);const idx=(y*canvas.width+x)*4;
+    image.data[idx]=r; image.data[idx+1]=g; image.data[idx+2]=b; image.data[idx+3]=255;}}}
+  ctx.putImageData(image,0,0);}
+drawColorWheel();
+
+// --- Palette & Multi-Color ---
+let paletteColors=[], multiSelectedColors=[];
+const multiColorModal=document.getElementById('multiColorModal');
+const multiPaletteContainer=document.getElementById('multiPaletteContainer');
+const addToMultiBtn=document.getElementById('addToMultiBtn');
+const addSelectedBtn=document.getElementById('addSelectedBtn');
+const closeModalBtn=document.getElementById('closeModalBtn');
+
+function updateColor(hue,sat,light){
+  currentHue=hue; currentSat=sat; currentLight=light;
+  const [r,g,b]=hslToRgb(hue/360,sat,light); const hex=rgbToHex(r,g,b);
+  const format=document.getElementById('formatSelect').value;
+  const display=format==='HEX'?`HEX: ${hex} | RGB: rgb(${r},${g},${b})`:`RGB: rgb(${r},${g},${b}) | HEX: ${hex}`;
+  document.getElementById('selectedColor').innerText=display;
+  document.getElementById('contrast').innerText=`Contrast with White: ${contrastRatio([r,g,b],[255,255,255]).toFixed(1)} | Contrast with Black: ${contrastRatio([r,g,b],[0,0,0]).toFixed(1)}`;
+
+  // Shades
+  const shadesContainer=document.getElementById('shadesContainer'); shadesContainer.innerHTML='';
+  for(let i=-3;i<=3;i++){if(i===0) continue;
+    const nr=Math.min(Math.max(r+i*30,0),255); const ng=Math.min(Math.max(g+i*30,0),255); const nb=Math.min(Math.max(b+i*30,0),255);
+    const nhex=rgbToHex(nr,ng,nb); const div=document.createElement('div'); div.className='shade-box'; div.style.backgroundColor=nhex;
+    const contrast=contrastRatio([nr,ng,nb],[255,255,255]); div.innerHTML='Aa'; const badge=document.createElement('div'); badge.className='contrast-badge'; badge.innerText=getWCAGLevel(contrast); div.appendChild(badge);
+    div.onclick=()=>updateColor(hue,sat,light); shadesContainer.appendChild(div);
+  }
+
+  // Add to palette
+  if(!paletteColors.includes(hex)){ paletteColors.push(hex); renderPalette(); }
+  document.getElementById('gradientPreview').style.background=`linear-gradient(to right, ${paletteColors.join(',')})`;
+
+  // Presets
+  updatePresets(hue,sat,light);
+}
+
+// Render Palette (Drag & Drop)
+function renderPalette(){
+  const container=document.getElementById('paletteContainer'); container.innerHTML='';
+  paletteColors.forEach((color,index)=>{
+    const div=document.createElement('div'); div.className='palette-box'; div.draggable=true; div.style.backgroundColor=color; div.innerHTML='Aa';
+    const [r,g,b]=hexToRgb(color); const contrast=contrastRatio([r,g,b],[255,255,255]);
+    const badge=document.createElement('div'); badge.className='contrast-badge'; badge.innerText=getWCAGLevel(contrast); div.appendChild(badge);
+    div.ondragstart=(e)=>{e.dataTransfer.setData('text/plain',index);};
+    div.ondragover=(e)=>{e.preventDefault();};
+    div.ondrop=(e)=>{const fromIndex=parseInt(e.dataTransfer.getData('text/plain')); [paletteColors[fromIndex],paletteColors[index]]=[paletteColors[index],paletteColors[fromIndex]]; renderPalette(); document.getElementById('gradientPreview').style.background=`linear-gradient(to right, ${paletteColors.join(',')})`;};
+    container.appendChild(div);
+  });
+}
+
+// Multi-Color Modal
+addToMultiBtn.addEventListener('click',()=>{
+  multiColorModal.style.display='flex';
+  const currentColor=document.getElementById('selectedColor').innerText.split('|')[0].split(':')[1].trim();
+  if(!multiSelectedColors.includes(currentColor)){ multiSelectedColors.push(currentColor); renderMultiColors(); }
+});
+
+function renderMultiColors(){
+  multiPaletteContainer.innerHTML='';
+  multiSelectedColors.forEach((color,i)=>{
+    const div=document.createElement('div'); div.className='multi-palette-box'; div.draggable=true; div.style.backgroundColor=color; div.innerHTML='Aa';
+    const [r,g,b]=hexToRgb(color); const contrast=contrastRatio([r,g,b],[255,255,255]);
+    const badge=document.createElement('div'); badge.className='contrast-badge'; badge.innerText=getWCAGLevel(contrast); div.appendChild(badge);
+    div.ondragstart=(e)=>{e.dataTransfer.setData('text/plain',i);};
+    div.ondragover=(e)=>{e.preventDefault();};
+    div.ondrop=(e)=>{const from=parseInt(e.dataTransfer.getData('text/plain')); [multiSelectedColors[from],multiSelectedColors[i]]=[multiSelectedColors[i],multiSelectedColors[from]]; renderMultiColors();};
+    div.onclick=()=>{multiSelectedColors.splice(i,1); renderMultiColors();};
+    multiPaletteContainer.appendChild(div);
+  });
+}
+
+addSelectedBtn.addEventListener('click',()=>{
+  multiSelectedColors.forEach(color=>{ if(!paletteColors.includes(color)){ paletteColors.push(color); } });
+  multiSelectedColors=[]; multiColorModal.style.display='none'; renderPalette(); document.getElementById('gradientPreview').style.background=`linear-gradient(to right, ${paletteColors.join(',')})`;
+});
+
+closeModalBtn.addEventListener('click',()=>{ multiColorModal.style.display='none'; });
+
+// Copy / Export Buttons
+document.getElementById('copyBtn').addEventListener('click',()=>{navigator.clipboard.writeText(document.getElementById('selectedColor').innerText).then(()=>alert('Color copied!'));});
+document.getElementById('copyPaletteBtn').addEventListener('click',()=>{navigator.clipboard.writeText(paletteColors.join(', ')).then(()=>alert('Palette copied!'));});
+document.getElementById('exportBtn').addEventListener('click',()=>{
+  if(paletteColors.length===0){alert('Add colors first!'); return;}
+  let css=':root {\n'; paletteColors.forEach((c,i)=>{css+=`  --color-${i+1}: ${c};\n`;}); css+='}';
+  const blob=new Blob([css],{type:'text/css'}); const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='palette.css'; a.click();
+});
+document.getElementById('exportPngBtn').addEventListener('click',()=>{
+  if(paletteColors.length===0){alert('Add colors first!'); return;}
+  const width=paletteColors.length*100; const height=100; const canvasPNG=document.createElement('canvas'); canvasPNG.width=width; canvasPNG.height=height;
+  const ctxPNG=canvasPNG.getContext('2d'); paletteColors.forEach((color,i)=>{ctxPNG.fillStyle=color; ctxPNG.fillRect(i*100,0,100,height);});
+  canvasPNG.toBlob(function(blob){ const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download='palette.png'; a.click(); });
+});
+
+// Canvas Click
+canvas.addEventListener('click',function(e){
+  const rect=canvas.getBoundingClientRect();
+  const x=e.clientX-rect.left-radius; const y=e.clientY-rect.top-radius;
+  const distance=Math.sqrt(x*x+y*y); if(distance>radius) return;
+  const angle=Math.atan2(y,x); const hue=(angle*180/Math.PI+360)%360;
+  const sat=distance/radius; const light=document.getElementById('lightness').value/100;
+  updateColor(hue,sat,light);
+});
+
+// Sliders
+document.getElementById('saturation').addEventListener('input',()=>{currentSat=document.getElementById('saturation').value/100; document.getElementById('satVal').innerText=document.getElementById('saturation').value+'%'; drawColorWheel();});
+document.getElementById('lightness').addEventListener('input',()=>{currentLight=document.getElementById('lightness').value/100; document.getElementById('lightVal').innerText=document.getElementById('lightness').value+'%'; drawColorWheel();});
+
+// Presets
+function generatePresets(hue){return {'Complementary':[hue,(hue+180)%360],'Analogous':[(hue-30+360)%360,hue,(hue+30)%360],'Triadic':[hue,(hue+120)%360,(hue+240)%360],'Tetradic':[hue,(hue+60)%360,(hue+180)%360,(hue+240)%360]};}
+function updatePresets(hue,sat,light){
+  const container=document.getElementById('presetContainer'); container.innerHTML='';
+  const schemes=generatePresets(hue);
+  for(const [name,colors] of Object.entries(schemes)){
+    colors.forEach(h=>{
+      const [r,g,b]=hslToRgb(h/360,sat,light); const hex=rgbToHex(r,g,b);
+      const div=document.createElement('div'); div.className='palette-box'; div.style.backgroundColor=hex; div.innerHTML='Aa';
+      const contrast=contrastRatio([r,g,b],[255,255,255]); const badge=document.createElement('div'); badge.className='contrast-badge'; badge.innerText=getWCAGLevel(contrast); div.appendChild(badge);
+      div.title=`${name}: ${hex}`; div.onclick=()=>updateColor(h,sat,light); container.appendChild(div);
+    });
+  }
+}
+</script>
+</body>
+</html>
