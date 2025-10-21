@@ -1,144 +1,164 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Text Case Converter – Convert Uppercase, Lowercase & More</title>
-  
-  <meta name="description" content="Convert text to uppercase, lowercase, title case, sentence case, or toggle case instantly. Free online tool with ads.">
-  <meta name="keywords" content="text case converter, uppercase, lowercase, title case, sentence case, online text tool">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Online Text Tools – Text Case Converter & Word Counter</title>
+<meta name="description" content="Use our free online text tools to convert text to uppercase, lowercase, title case, or count words and characters instantly. Free and easy to use.">
+<meta name="keywords" content="text case converter, word counter, character counter, online text tools, free text tools">
 
-  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
 
-  <style>
-    body { font-family:'Roboto', sans-serif; margin:0; padding:0; background:#f9f9f9; }
-    .container { max-width:700px; margin:30px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
-    h1 { text-align:center; color:#111; margin-bottom:10px; }
-    p { text-align:center; color:#555; margin-bottom:20px; }
-    textarea { width:100%; height:120px; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px; margin-bottom:10px; }
-    button { padding:10px 15px; margin:5px; border:none; border-radius:5px; background:#FF0000; color:#fff; cursor:pointer; font-size:16px; }
-    #output { margin-top:15px; padding:10px; background:#f1f1f1; border-radius:5px; min-height:50px; white-space:pre-wrap; }
-    .ad-section { text-align:center; margin:15px 0; }
+<style>
+body { font-family:'Roboto', sans-serif; margin:0; padding:0; background:#f9f9f9; }
+.container { max-width:750px; margin:30px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+h1 { text-align:center; color:#111; margin-bottom:10px; }
+p { text-align:center; color:#555; margin-bottom:20px; }
+textarea { width:100%; height:150px; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px; margin-bottom:10px; }
+button { padding:10px 15px; margin:5px; border:none; border-radius:5px; background:#FF0000; color:#fff; cursor:pointer; font-size:16px; }
+#output { margin-top:15px; padding:10px; background:#f1f1f1; border-radius:5px; min-height:50px; white-space:pre-wrap; }
+.ad-section { text-align:center; margin:15px 0; }
 
-    /* Modal Styles */
-    .modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; justify-content:center; align-items:center; }
-    .modal-content { background:#fff; padding:20px; border-radius:10px; max-width:500px; text-align:center; position:relative; }
-    .modal-content h2 { margin-bottom:10px; }
-    .modal-content p { margin-bottom:15px; font-weight:bold; }
+/* Tabs */
+.tab-container { display:flex; justify-content:center; margin-bottom:20px; }
+.tab { padding:10px 20px; cursor:pointer; background:#eee; margin:0 5px; border-radius:5px; }
+.tab.active { background:#FF0000; color:#fff; }
 
-    .continue-btn { padding:10px 20px; background:#FF0000; color:#fff; border:none; border-radius:5px; cursor:pointer; font-size:16px; margin-top:10px; }
+/* Modal Styles */
+.modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; justify-content:center; align-items:center; }
+.modal-content { background:#fff; padding:20px; border-radius:10px; max-width:500px; text-align:center; position:relative; }
+.modal-content h2 { margin-bottom:10px; }
+.modal-content p { margin-bottom:15px; font-weight:bold; }
+.continue-btn { padding:10px 20px; background:#FF0000; color:#fff; border:none; border-radius:5px; cursor:pointer; font-size:16px; margin-top:10px; }
 
-    /* Disable tool initially */
-    .disabled { pointer-events:none; opacity:0.4; }
-  </style>
+/* Disable tool initially */
+.disabled { pointer-events:none; opacity:0.4; }
+</style>
 </head>
 <body>
 
 <div class="container disabled" id="toolContainer">
-  <h1>Text Case Converter</h1>
-  <p>Convert your text to uppercase, lowercase, title case, sentence case, or toggle case instantly.</p>
+  <h1>Free Online Text Tools</h1>
+  <p>Convert text and count words instantly with our free online tools.</p>
 
   <!-- Top Banner Ad -->
   <div class="ad-section">
     <script type="text/javascript">
-      atOptions = {
-        'key' : '36499e43b7e4f05e5e4ea13d0cdc485b',
-        'format' : 'iframe',
-        'height' : 90,
-        'width' : 728,
-        'params' : {}
-      };
+      atOptions = {'key' : '36499e43b7e4f05e5e4ea13d0cdc485b','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};
     </script>
     <script type="text/javascript" src="//www.highperformanceformat.com/36499e43b7e4f05e5e4ea13d0cdc485b/invoke.js"></script>
   </div>
 
-  <textarea id="inputText" placeholder="Paste your text here..."></textarea>
-  <br>
-  <button onclick="convertText('upper')">UPPERCASE</button>
-  <button onclick="convertText('lower')">lowercase</button>
-  <button onclick="convertText('title')">Title Case</button>
-  <button onclick="convertText('sentence')">Sentence Case</button>
-  <button onclick="convertText('toggle')">Toggle Case</button>
+  <!-- Tabs -->
+  <div class="tab-container">
+    <div class="tab active" id="tabCase">Text Case Converter</div>
+    <div class="tab" id="tabWord">Word Counter</div>
+  </div>
 
-  <div id="output"></div>
+  <!-- Text Case Converter -->
+  <div id="textCaseTool">
+    <textarea id="inputTextCase" placeholder="Paste your text here..."></textarea><br>
+    <button onclick="convertText('upper')">UPPERCASE</button>
+    <button onclick="convertText('lower')">lowercase</button>
+    <button onclick="convertText('title')">Title Case</button>
+    <button onclick="convertText('sentence')">Sentence Case</button>
+    <button onclick="convertText('toggle')">Toggle Case</button>
+    <div id="outputCase"></div>
+  </div>
+
+  <!-- Word Counter -->
+  <div id="wordCounterTool" style="display:none;">
+    <textarea id="inputWord" placeholder="Paste your text here..."></textarea><br>
+    <button onclick="countWords()">Count Words</button>
+    <div id="outputWord"></div>
+  </div>
 
   <!-- Bottom Mobile Banner -->
   <div class="ad-section">
     <script type="text/javascript">
-      atOptions = {
-        'key' : '205b14a0c2e63baa39d830075ee1ba9d',
-        'format' : 'iframe',
-        'height' : 50,
-        'width' : 320,
-        'params' : {}
-      };
+      atOptions = {'key' : '205b14a0c2e63baa39d830075ee1ba9d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};
     </script>
     <script type="text/javascript" src="//www.highperformanceformat.com/205b14a0c2e63baa39d830075ee1ba9d/invoke.js"></script>
   </div>
 </div>
 
-<!-- Modal Popup -->
+<!-- Modal -->
 <div id="adModal" class="modal">
   <div class="modal-content">
     <h2>Special Offer</h2>
-    <p>Check out this ad to support us and continue using the tool!</p>
-
-    <!-- Ad iframe for display only -->
+    <p>Check out this ad to support us and continue using the tools!</p>
     <div class="ad-section">
       <script type="text/javascript">
-        atOptions = {
-          'key' : '205b14a0c2e63baa39d830075ee1ba9d',
-          'format' : 'iframe',
-          'height' : 50,
-          'width' : 320,
-          'params' : {}
-        };
+        atOptions = {'key' : '205b14a0c2e63baa39d830075ee1ba9d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};
       </script>
       <script type="text/javascript" src="//www.highperformanceformat.com/205b14a0c2e63baa39d830075ee1ba9d/invoke.js"></script>
     </div>
-
-    <!-- Separate Continue Button -->
     <button id="continueBtn" class="continue-btn">Click to Continue</button>
   </div>
 </div>
 
 <script>
-  // Text Conversion Function
-  function convertText(type) {
-    let text = document.getElementById('inputText').value;
-    if(!text) return;
-    let result = '';
-    switch(type){
-      case 'upper': result = text.toUpperCase(); break;
-      case 'lower': result = text.toLowerCase(); break;
-      case 'title': result = text.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.substr(1).toLowerCase()); break;
-      case 'sentence': result = text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase()); break;
-      case 'toggle': result = text.split('').map(c => c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()).join(''); break;
-    }
-    document.getElementById('output').innerText = result;
+// Tabs
+const tabCase = document.getElementById('tabCase');
+const tabWord = document.getElementById('tabWord');
+const textCaseTool = document.getElementById('textCaseTool');
+const wordCounterTool = document.getElementById('wordCounterTool');
+
+tabCase.addEventListener('click', () => {
+  tabCase.classList.add('active');
+  tabWord.classList.remove('active');
+  textCaseTool.style.display = 'block';
+  wordCounterTool.style.display = 'none';
+});
+tabWord.addEventListener('click', () => {
+  tabWord.classList.add('active');
+  tabCase.classList.remove('active');
+  wordCounterTool.style.display = 'block';
+  textCaseTool.style.display = 'none';
+});
+
+// Text Case Converter
+function convertText(type) {
+  let text = document.getElementById('inputTextCase').value;
+  if(!text) return;
+  let result = '';
+  switch(type){
+    case 'upper': result = text.toUpperCase(); break;
+    case 'lower': result = text.toLowerCase(); break;
+    case 'title': result = text.replace(/\w\S*/g, t => t.charAt(0).toUpperCase() + t.substr(1).toLowerCase()); break;
+    case 'sentence': result = text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g, c => c.toUpperCase()); break;
+    case 'toggle': result = text.split('').map(c => c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()).join(''); break;
   }
+  document.getElementById('outputCase').innerText = result;
+}
 
-  const modal = document.getElementById('adModal');
-  const continueBtn = document.getElementById('continueBtn');
-  const toolContainer = document.getElementById('toolContainer');
+// Word Counter
+function countWords() {
+  let text = document.getElementById('inputWord').value;
+  let wordCount = text.trim() === '' ? 0 : text.trim().split(/\s+/).length;
+  let charCount = text.length;
+  let lineCount = text.split(/\n/).length;
+  document.getElementById('outputWord').innerText = `Words: ${wordCount}\nCharacters: ${charCount}\nLines: ${lineCount}`;
+}
 
-  // Show modal on every visit and disable tool initially
-  window.onload = function(){
-    modal.style.display = 'flex';
-    toolContainer.classList.add('disabled');
-  }
+// Modal
+const modal = document.getElementById('adModal');
+const continueBtn = document.getElementById('continueBtn');
+const toolContainer = document.getElementById('toolContainer');
 
-  // Clicking the Continue button closes modal and enables tool
-  continueBtn.addEventListener('click', function() {
-    modal.style.display = 'none';
-    toolContainer.classList.remove('disabled');
-  });
+window.onload = function() {
+  modal.style.display = 'flex';
+  toolContainer.classList.add('disabled');
+}
 
-  // Prevent closing modal by clicking outside
-  modal.addEventListener('click', function(e){
-      if(e.target === modal) e.stopPropagation();
-  });
+continueBtn.addEventListener('click', function() {
+  modal.style.display = 'none';
+  toolContainer.classList.remove('disabled');
+});
+
+modal.addEventListener('click', function(e){
+  if(e.target === modal) e.stopPropagation();
+});
 </script>
-
 </body>
 </html>
