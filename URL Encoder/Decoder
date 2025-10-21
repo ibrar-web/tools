@@ -1,0 +1,220 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Free Developer & Text Tools – URL Encoder/Decoder, Password Generator, Text Case, Word Counter & Text Cleaner</title>
+<meta name="description" content="Encode or decode URLs, generate passwords, convert text, count words, and clean text instantly with our free developer and text tools. Easy, free, and secure.">
+<meta name="keywords" content="url encoder, url decoder, password generator, text case converter, word counter, text cleaner, online text tools, developer tools, free tools">
+
+<link href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;500;700&display=swap" rel="stylesheet">
+
+<style>
+body { font-family:'Roboto', sans-serif; margin:0; padding:0; background:#f9f9f9; }
+.container { max-width:750px; margin:30px auto; background:#fff; padding:20px; border-radius:10px; box-shadow:0 2px 10px rgba(0,0,0,0.1); }
+h1 { text-align:center; color:#111; margin-bottom:10px; }
+p { text-align:center; color:#555; margin-bottom:20px; }
+textarea, input[type="number"] { width:100%; height:150px; padding:10px; border-radius:5px; border:1px solid #ccc; font-size:16px; margin-bottom:10px; }
+button { padding:10px 15px; margin:5px; border:none; border-radius:5px; background:#FF0000; color:#fff; cursor:pointer; font-size:16px; }
+#output { margin-top:15px; padding:10px; background:#f1f1f1; border-radius:5px; min-height:50px; white-space:pre-wrap; text-align:left; }
+.ad-section { text-align:center; margin:15px 0; }
+
+/* Tabs */
+.tab-container { display:flex; justify-content:center; margin-bottom:20px; flex-wrap:wrap; }
+.tab { padding:10px 20px; cursor:pointer; background:#eee; margin:5px; border-radius:5px; }
+.tab.active { background:#FF0000; color:#fff; }
+
+/* Modal Styles */
+.modal { display:none; position:fixed; z-index:1000; left:0; top:0; width:100%; height:100%; background:rgba(0,0,0,0.5); display:flex; justify-content:center; align-items:center; }
+.modal-content { background:#fff; padding:20px; border-radius:10px; max-width:500px; text-align:center; position:relative; }
+.modal-content h2 { margin-bottom:10px; }
+.modal-content p { margin-bottom:15px; font-weight:bold; }
+.continue-btn { padding:10px 20px; background:#FF0000; color:#fff; border:none; border-radius:5px; cursor:pointer; font-size:16px; margin-top:10px; }
+
+/* Disable tool initially */
+.disabled { pointer-events:none; opacity:0.4; }
+</style>
+</head>
+<body>
+
+<div class="container disabled" id="toolContainer">
+  <h1>Free Developer & Text Tools</h1>
+  <p>Encode/decode URLs, generate passwords, convert text, count words, and clean text with our free tools.</p>
+
+  <!-- Top Banner Ad -->
+  <div class="ad-section">
+    <script type="text/javascript">
+      atOptions = {'key' : '36499e43b7e4f05e5e4ea13d0cdc485b','format' : 'iframe','height' : 90,'width' : 728,'params' : {}};
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/36499e43b7e4f05e5e4ea13d0cdc485b/invoke.js"></script>
+  </div>
+
+  <!-- Tabs -->
+  <div class="tab-container">
+    <div class="tab active" id="tabURL">URL Encoder/Decoder</div>
+    <div class="tab" id="tabPassword">Password Generator</div>
+    <div class="tab" id="tabCase">Text Case Converter</div>
+    <div class="tab" id="tabWord">Word Counter</div>
+    <div class="tab" id="tabClean">Text Cleaner</div>
+  </div>
+
+  <!-- URL Encoder/Decoder -->
+  <div id="urlTool">
+    <textarea id="inputURL" placeholder="Enter URL or text here..."></textarea><br>
+    <button onclick="encodeURL()">Encode URL</button>
+    <button onclick="decodeURL()">Decode URL</button>
+    <div id="outputURL"></div>
+  </div>
+
+  <!-- Password Generator -->
+  <div id="passwordTool" style="display:none;">
+    <p>Select password length (4-32 characters):</p>
+    <input type="number" id="passwordLength" min="4" max="32" value="12"><br>
+    <button onclick="generatePassword()">Generate Password</button>
+    <div id="outputPassword"></div>
+  </div>
+
+  <!-- Text Case Converter -->
+  <div id="textCaseTool" style="display:none;">
+    <textarea id="inputTextCase" placeholder="Paste your text here..."></textarea><br>
+    <button onclick="convertText('upper')">UPPERCASE</button>
+    <button onclick="convertText('lower')">lowercase</button>
+    <button onclick="convertText('title')">Title Case</button>
+    <button onclick="convertText('sentence')">Sentence Case</button>
+    <button onclick="convertText('toggle')">Toggle Case</button>
+    <div id="outputCase"></div>
+  </div>
+
+  <!-- Word Counter -->
+  <div id="wordCounterTool" style="display:none;">
+    <textarea id="inputWord" placeholder="Paste your text here..."></textarea><br>
+    <button onclick="countWords()">Count Words</button>
+    <div id="outputWord"></div>
+  </div>
+
+  <!-- Text Cleaner -->
+  <div id="textCleanerTool" style="display:none;">
+    <textarea id="inputClean" placeholder="Paste your text here..."></textarea><br>
+    <button onclick="cleanText()">Remove Line Breaks & Extra Spaces</button>
+    <div id="outputClean"></div>
+  </div>
+
+  <!-- Bottom Mobile Banner -->
+  <div class="ad-section">
+    <script type="text/javascript">
+      atOptions = {'key' : '205b14a0c2e63baa39d830075ee1ba9d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};
+    </script>
+    <script type="text/javascript" src="//www.highperformanceformat.com/205b14a0c2e63baa39d830075ee1ba9d/invoke.js"></script>
+  </div>
+</div>
+
+<!-- Modal -->
+<div id="adModal" class="modal">
+  <div class="modal-content">
+    <h2>Special Offer</h2>
+    <p>Check out this ad to support us and continue using the tools!</p>
+    <div class="ad-section">
+      <script type="text/javascript">
+        atOptions = {'key' : '205b14a0c2e63baa39d830075ee1ba9d','format' : 'iframe','height' : 50,'width' : 320,'params' : {}};
+      </script>
+      <script type="text/javascript" src="//www.highperformanceformat.com/205b14a0c2e63baa39d830075ee1ba9d/invoke.js"></script>
+    </div>
+    <button id="continueBtn" class="continue-btn">Click to Continue</button>
+  </div>
+</div>
+
+<script>
+// Tabs
+const tabURL = document.getElementById('tabURL');
+const tabPassword = document.getElementById('tabPassword');
+const tabCase = document.getElementById('tabCase');
+const tabWord = document.getElementById('tabWord');
+const tabClean = document.getElementById('tabClean');
+
+const urlTool = document.getElementById('urlTool');
+const passwordTool = document.getElementById('passwordTool');
+const textCaseTool = document.getElementById('textCaseTool');
+const wordCounterTool = document.getElementById('wordCounterTool');
+const textCleanerTool = document.getElementById('textCleanerTool');
+
+tabURL.addEventListener('click', ()=>{ setActiveTab(tabURL); showTool(urlTool); });
+tabPassword.addEventListener('click', ()=>{ setActiveTab(tabPassword); showTool(passwordTool); });
+tabCase.addEventListener('click', ()=>{ setActiveTab(tabCase); showTool(textCaseTool); });
+tabWord.addEventListener('click', ()=>{ setActiveTab(tabWord); showTool(wordCounterTool); });
+tabClean.addEventListener('click', ()=>{ setActiveTab(tabClean); showTool(textCleanerTool); });
+
+function setActiveTab(tab){
+  [tabURL, tabPassword, tabCase, tabWord, tabClean].forEach(t=>t.classList.remove('active'));
+  tab.classList.add('active');
+}
+function showTool(tool){
+  [urlTool, passwordTool, textCaseTool, wordCounterTool, textCleanerTool].forEach(t=>t.style.display='none');
+  tool.style.display='block';
+}
+
+// URL Encoder/Decoder
+function encodeURL(){
+  let text = document.getElementById('inputURL').value;
+  if(!text) return;
+  document.getElementById('outputURL').innerText = encodeURIComponent(text);
+}
+function decodeURL(){
+  let text = document.getElementById('inputURL').value;
+  if(!text) return;
+  document.getElementById('outputURL').innerText = decodeURIComponent(text);
+}
+
+// Password Generator
+function generatePassword(){
+  let length=parseInt(document.getElementById('passwordLength').value);
+  if(isNaN(length)||length<4) length=4;
+  if(length>32) length=32;
+  const chars='ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+-=';
+  let password='';
+  for(let i=0;i<length;i++) password+=chars.charAt(Math.floor(Math.random()*chars.length));
+  document.getElementById('outputPassword').innerText=password;
+}
+
+// Text Case Converter
+function convertText(type){
+  let text=document.getElementById('inputTextCase').value;
+  if(!text) return;
+  let result='';
+  switch(type){
+    case 'upper': result=text.toUpperCase(); break;
+    case 'lower': result=text.toLowerCase(); break;
+    case 'title': result=text.replace(/\w\S*/g,t=>t.charAt(0).toUpperCase()+t.substr(1).toLowerCase()); break;
+    case 'sentence': result=text.toLowerCase().replace(/(^\s*\w|[.!?]\s*\w)/g,c=>c.toUpperCase()); break;
+    case 'toggle': result=text.split('').map(c=>c===c.toUpperCase()?c.toLowerCase():c.toUpperCase()).join(''); break;
+  }
+  document.getElementById('outputCase').innerText=result;
+}
+
+// Word Counter
+function countWords(){
+  let text=document.getElementById('inputWord').value;
+  let wordCount=text.trim()===''?0:text.trim().split(/\s+/).length;
+  let charCount=text.length;
+  let lineCount=text.split(/\n/).length;
+  document.getElementById('outputWord').innerText=`Words: ${wordCount}\nCharacters: ${charCount}\nLines: ${lineCount}`;
+}
+
+// Text Cleaner
+function cleanText(){
+  let text=document.getElementById('inputClean').value;
+  let cleaned=text.replace(/\r\n|\n|\r/g,' ').replace(/\s+/g,' ').trim();
+  document.getElementById('outputClean').innerText=cleaned;
+}
+
+// Modal
+const modal=document.getElementById('adModal');
+const continueBtn=document.getElementById('continueBtn');
+const toolContainer=document.getElementById('toolContainer');
+
+window.onload=function(){ modal.style.display='flex'; toolContainer.classList.add('disabled'); }
+continueBtn.addEventListener('click',()=>{ modal.style.display='none'; toolContainer.classList.remove('disabled'); });
+modal.addEventListener('click',e=>{ if(e.target===modal) e.stopPropagation(); });
+
+</script>
+</body>
+</html>
